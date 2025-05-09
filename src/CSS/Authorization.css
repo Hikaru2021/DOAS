@@ -1,0 +1,117 @@
+/* Container based on your provided measurements with new class names */
+.content-container {
+  background-color: #F4F2F2; /* Light gray background */
+  min-height: calc(100vh - 60px); /* Adjust for navbar height */
+  min-width: calc(100vw - 250px); /* Adjust for sidebar width */
+  margin-left: 250px; /* Push content to the right of the sidebar */
+  margin-top: 50px; /* Push content down below the navbar */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Header styles */
+.content-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.content-date {
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+/* Search bar container */
+.content-search-bar {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+.content-search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Add New Permit Button */
+.content-add-btn {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Section Title for Applications List */
+.content-section-title {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+/* Applications Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Application Card Styles */
+.content-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  position: relative;
+}
+
+.content-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.content-edit-icon {
+  float: right;
+  cursor: pointer;
+}
+
+.content-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Badge colors */
+.certificate {
+  background-color: #dff0d8;
+  color: #4caf50;
+}
+
+.permit {
+  background-color: #d1ecf1;
+  color: #007bff;
+}
+
+.content-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.content-apply-btn {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}

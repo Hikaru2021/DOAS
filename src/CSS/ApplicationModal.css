@@ -1,0 +1,37 @@
+/* Adjust modal container to consider sidebar and navbar */
+.modal-container {
+    position: fixed;
+    top: 60px; /* Navbar height */
+    left: 250px; /* Sidebar width */
+    width: calc(100% - 250px); /* Full width minus sidebar */
+    height: calc(100vh - 60px); /* Full height minus navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Dim background */
+    z-index: 999; /* Ensure it’s above the navbar and sidebar */
+}
+
+/* Modal */
+.modal {
+    width: 70%; /* Set a reasonable width */
+    max-width: 900px; /* Prevent it from being too large */
+    height: auto;
+    min-height: 70vh; /* Avoid overflowing */
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 1000; /* Ensure it's above the backdrop */
+}
+
+/* Backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 60px; /* Respect navbar */
+    left: 250px; /* Respect sidebar */
+    width: calc(100% - 250px); /* Cover only content area */
+    height: calc(100vh - 60px); /* Cover only content area */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}

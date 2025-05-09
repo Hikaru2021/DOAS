@@ -1,0 +1,220 @@
+.maps-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100vh;
+    width: calc(100vw - 250px);
+    margin-left: 250px;
+    background-color: #FAFAFA;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 1.5rem;
+    gap: 24px;
+}
+
+.maps-content {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.maps-list-panel {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 16px;
+    height: 600px;
+    min-height: 400px;
+    min-width: 280px;
+    align-self: flex-start;
+    margin-top: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.maps-app-list-scroll {
+    flex: 1;
+    max-height: 100%;
+    overflow-y: auto;
+    margin-top: 8px;
+}
+
+.maps-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 0.5rem;
+}
+
+.maps-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.maps-subtitle {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+.map-container {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 600px;
+    min-height: 400px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.map-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.map-control-button {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.map-control-button:hover {
+    background-color: #388E3C;
+}
+
+.map-info-panel {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.map-info-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.map-info-content {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.map-list-row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    flex: 1 1 0%;
+    align-items: flex-start;
+    height: 100%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .maps-container {
+        flex-direction: column;
+        gap: 16px;
+        padding: 1rem;
+        margin-left: 0;
+        width: 100vw;
+    }
+    .maps-content, .maps-list-panel {
+        flex: unset;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+    .maps-list-panel {
+        max-height: none;
+    }
+    .map-list-row {
+        flex-direction: column;
+        gap: 16px;
+        height: auto;
+    }
+    .maps-title {
+        margin-top: 40px;
+        font-size: 24px;
+    }
+    .maps-subtitle {
+        font-size: 12px;
+    }
+}
+
+.maps-app-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.maps-app-list-item {
+    background: #f8f9fa;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px 18px 12px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.maps-app-list-item:hover {
+    background: #e3f2fd;
+    border: 1.5px solid #1976d2;
+    box-shadow: 0 8px 24px rgba(25, 118, 210, 0.13);
+    cursor: pointer;
+}
+
+.maps-app-list-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.maps-app-list-icon {
+    font-size: 1.3em;
+    color: #1976d2;
+}
+
+.maps-applicant-name {
+    font-weight: 600;
+    font-size: 1.08em;
+    color: #222;
+}
+
+.maps-app-list-address {
+    font-size: 0.98em;
+    color: #444;
+    margin-bottom: 2px;
+    margin-left: 1.7em;
+}
+
+.maps-app-list-coords {
+    font-size: 0.92em;
+    color: #888;
+    margin-left: 1.7em;
+} 

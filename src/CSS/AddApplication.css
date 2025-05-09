@@ -1,0 +1,104 @@
+/* Modal container layout with sidebar + navbar consideration */
+.modal-container {
+    position: fixed;
+    top: 60px; /* Navbar height */
+    left: 250px; /* Sidebar width */
+    width: calc(100% - 250px);
+    height: calc(100vh - 60px);
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  /* Main modal box */
+  .modal {
+    width: 860px;
+    max-height: 90vh;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+  }
+  
+  /* Scrollable content */
+  .modal-content.scrollable {
+    padding: 24px;
+    overflow-y: auto;
+    max-height: calc(90vh - 80px); /* Adjust for footer height */
+  }
+  
+  /* Footer with buttons */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 24px;
+    border-top: 1px solid #e0e0e0;
+    background: #fff;
+  }
+  
+  /* Badge style */
+  .badge {
+    display: inline-block;
+    background: #d1e7d3;
+    color: #2e7d32;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+  
+  /* Download section */
+  .download-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  
+  .download-section input {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .download-btn {
+    background-color: #5a9e5a;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .download-btn:hover {
+    background-color: #4a884a;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+  }
+  
+  .btn-primary {
+    background: #5a9e5a;
+    color: white;
+  }
+  

@@ -1,0 +1,422 @@
+/* Shared Table Styles */
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.shared-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shared-table th,
+.shared-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.shared-table td:last-child {
+  padding: 8px 10px;
+  width: 1%;
+  white-space: nowrap;
+}
+
+.shared-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.875rem;
+}
+
+.shared-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.shared-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-active,
+.status-approved {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+}
+
+.status-inactive,
+.status-rejected,
+.status-denied {
+  background-color: #ffa8a8;
+  color: #a61e4d;
+}
+
+.status-pending,
+.status-submitted {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* Ensuring uppercase versions are also styled */
+[class*="status-badge submitted"] {
+  background-color: #fff3cd !important;
+  color: #856404 !important;
+}
+
+.status-review,
+.status-in-review,
+.status-on-review {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-badge.payment-pending {
+  background-color: #ffe066;
+  color: #7a5d00;
+}
+.status-badge.payment-recieved {
+  background-color: #b2f2bb;
+  color: #186a3b;
+}
+.status-badge.payment-failed {
+  background-color: #f8d7da;
+  color: #dc3545;
+}
+.status-badge.inspecting {
+  background-color: #d0ebff;
+  color: #1864ab;
+}
+.status-badge.completed {
+  background-color: #e6fcf5;
+  color: #087f5b;
+}
+
+/* Action Buttons */
+.shared-table .action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: auto !important;
+  min-width: 0 !important;
+  padding: 0;
+}
+
+.shared-table .action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #f3f4f6;
+  padding: 0;
+  margin-right: 2px;
+}
+
+.shared-table .action-button:last-child {
+  margin-right: 0;
+}
+
+.action-buttons .action-button:last-child {
+  margin-right: 0 !important;
+}
+
+.shared-table .action-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.shared-table .action-button.edit-button {
+  color: #4f46e5;
+  background-color: #eef2ff;
+}
+
+.shared-table .action-button.edit-button:hover {
+  background-color: #e0e7ff;
+}
+
+.shared-table .action-button.delete-button {
+  color: #dc2626;
+  background-color: #fee2e2;
+}
+
+.shared-table .action-button.delete-button:hover {
+  background-color: #fecaca;
+}
+
+.shared-table .action-button.view-button {
+  color: #2563eb;
+  background-color: #dbeafe;
+}
+
+.shared-table .action-button.view-button:hover {
+  background-color: #bfdbfe;
+}
+
+.shared-table .action-button.track-button {
+  color: #059669;
+  background-color: #d1fae5;
+}
+
+.shared-table .action-button.track-button:hover {
+  background-color: #a7f3d0;
+}
+
+.shared-table .action-button.manage-button {
+  color: #6366f1;
+  background-color: #e0e7ff;
+}
+
+.shared-table .action-button.manage-button:hover {
+  background-color: #c7d2fe;
+}
+
+.shared-table .action-button.download-button {
+  color: #7c3aed;
+  background-color: #ede9fe;
+}
+
+.shared-table .action-button.download-button:hover {
+  background-color: #ddd6fe;
+}
+
+/* Remove gap for single button, keep for multiple */
+.action-buttons .action-button:only-child {
+  margin-right: 0 !important;
+}
+
+/* Pagination */
+.pagination-container {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  margin-top: 20px;
+}
+
+.pagination {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.pagination-button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #f8f9fa;
+  border-color: #999;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-button.active {
+  background-color: #1976d2;
+  color: white;
+  border-color: #1976d2;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 36px;
+}
+
+.page-info {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 0.875rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff3f3;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 15px;
+  font-size: 0.875rem;
+}
+
+.retry-button {
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .shared-table {
+    min-width: 800px;
+  }
+
+  .shared-table .action-buttons {
+    gap: 4px;
+  }
+
+  .shared-table .action-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .shared-table .action-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+  .pagination-pages {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .pagination-button:first-child {
+    order: 1;
+  }
+
+  .pagination-button:last-child {
+    order: 3;
+  }
+}
+
+/* Fade out animation for deleted row */
+.fade-out-row {
+  animation: fadeOutRow 0.4s forwards;
+}
+
+@keyframes fadeOutRow {
+  from {
+    opacity: 1;
+    height: 48px;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* Small modal for delete confirmation */
+.modal-container.delete-modal, .modal-container.small {
+  max-width: 350px;
+  width: 90%;
+  padding: 1.5rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* Centered table header and cell */
+.th-center, .td-center {
+  text-align: center !important;
+}
+
+/* Utility class for right-aligning numbers or time if needed */
+.td-right {
+  text-align: right !important;
+}
+
+/*
+Date/Time formatting utility (for use in all pages):
+- formatDateMMDDYYYY(date): returns 'MM-DD-YYYY'
+- formatTime12hr(date): returns 'HH:MM AM/PM'
+*/ 

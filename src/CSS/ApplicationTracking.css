@@ -1,0 +1,2173 @@
+.tracking-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tracking-container {
+  background-color: #FAFAFA;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.tracking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.tracking-title {
+  margin: 0;
+}
+
+.tracking-title h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.tracking-id {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.tracking-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.tracking-close:hover {
+  color: #333;
+}
+
+.tracking-content {
+  padding: 1.5rem;
+}
+
+.tracking-progress {
+  margin-bottom: 2rem;
+}
+
+.progress-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.progress-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+  min-height: 120px;
+  background: transparent;
+}
+
+.progress-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #43a047 20%, #66bb6a 40%, #b2ff59 60%, #43a047 80%);
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  box-shadow: 0 0 12px 2px #43a04766;
+  animation:
+    progressLineShimmer 1.5s linear infinite,
+    progressLinePulse 2s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes progressLineShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes progressLinePulse {
+  0%, 100% { box-shadow: 0 0 12px 2px #43a04766; }
+  50% { box-shadow: 0 0 24px 6px #b2ff5966; }
+}
+
+.progress-line-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  background: #4CAF50;
+  transform: translateY(-50%);
+  transition: width 0.5s ease-in-out;
+  z-index: 2;
+}
+
+.progress-step {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.step-circle svg {
+  width: 20px;
+  height: 20px;
+  color: #666;
+}
+
+.step-label {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.progress-step.current .step-circle {
+  border-color: #4CAF50;
+  background: #4CAF50;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+}
+
+.progress-step.current .step-circle svg {
+  color: white;
+}
+
+.progress-step.current .step-label {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.progress-step.completed .step-circle {
+  border-color: #4CAF50;
+  background: #4CAF50;
+}
+
+.progress-step.completed .step-circle svg {
+  color: white;
+}
+
+.progress-step.completed .step-label {
+  color: #4CAF50;
+}
+
+.progress-step.rejected .step-circle {
+  border-color: #dc3545;
+  background: #dc3545;
+}
+
+.progress-step.rejected .step-circle svg {
+  color: white;
+}
+
+.progress-step.rejected .step-label {
+  color: #dc3545;
+}
+
+.timeline-list {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  position: relative;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  align-items: center;
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-item:hover {
+  background: none !important;
+  transform: none !important;
+}
+
+.timeline-date {
+  min-width: 100px;
+  text-align: right;
+  padding-right: 1rem;
+  color: #666;
+  font-size: 0.95rem;
+  position: relative;
+  border-right: none !important;
+}
+
+.timeline-date::after, .timeline-date::before {
+  display: none !important;
+}
+
+.timeline-date .date {
+  font-weight: 500;
+  color: #333;
+}
+
+.timeline-date .time {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.timeline-marker {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background: #4CAF50;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+  align-self: center;
+}
+
+.timeline-marker::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -24px;
+  bottom: -24px;
+  width: 2px;
+  background: #e0e0e0;
+  transform: translateX(-50%);
+  z-index: -1;
+  opacity: 1 !important;
+  background: #e0e0e0 !important;
+}
+
+.timeline-content {
+  flex: 1;
+  padding: 0.5rem 0;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+.additional-info {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #f7f7f7;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.additional-info p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.progress-fill.rejected {
+  background: #dc3545;
+}
+
+.progress-fill.approved {
+  background: #4CAF50;
+}
+
+.progress-fill.needs-revision {
+  background: #ffc107;
+}
+
+/* Timeline section */
+.timeline-list {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  position: relative;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateX(4px);
+}
+
+.timeline-date {
+  min-width: 120px;
+  text-align: right;
+  padding-right: 1rem;
+  border-right: 2px solid #e0e0e0;
+}
+
+.timeline-date .date {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-date .time {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.timeline-marker {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background: #4CAF50;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+  align-self: center;
+}
+
+.timeline-marker::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -24px;
+  bottom: -24px;
+  width: 2px;
+  background: #e0e0e0;
+  transform: translateX(-50%);
+  z-index: -1;
+  opacity: 1 !important;
+  background: #e0e0e0 !important;
+}
+
+.timeline-content {
+  flex: 1;
+  padding: 0.5rem 0;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+.additional-info {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+}
+
+.additional-info p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Different states */
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  margin-top: -2rem;
+}
+
+.step-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  border: 3px solid #fff;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.progress-step.active .step-dot {
+  background-color: #4CAF50;
+  border-color: #fff;
+}
+
+.step-content {
+  padding: 0 0.5rem;
+}
+
+.step-content h3 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+}
+
+.step-content p {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
+.progress-step.active .step-content h3 {
+  color: #4CAF50;
+}
+
+.recipient-info {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #e0e0e0;
+  font-style: italic;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .tracking-container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 0 12px 12px;
+    box-shadow: none;
+  }
+  .tracking-content {
+    padding: 0.75rem 0.5rem !important;
+  }
+  .resubmission-area {
+    padding: 1rem 0.5rem !important;
+    margin-top: 1rem;
+  }
+  .file-upload-container {
+    padding: 1rem 0.5rem !important;
+    min-width: 0;
+  }
+  .selected-files-container {
+    padding: 0.75rem 0.5rem !important;
+    margin-top: 1rem;
+  }
+  .admin-modal {
+    width: 98vw !important;
+    max-width: 98vw !important;
+    padding: 1rem 0.5rem !important;
+  }
+  .tracking-title h2 {
+    font-size: 1.1rem !important;
+  }
+  .tracking-id {
+    font-size: 0.85rem !important;
+  }
+  .application-header {
+    margin-bottom: 0 !important;
+  }
+  .header-main{
+    margin-bottom: 0 !important;
+    gap: 0 !important;
+  }
+  .header-main h1 {
+    font-size: 1.25rem !important;
+  }
+  .header-main p {
+    font-size: 12px !important;
+  }
+  p{
+    font-size: 12px !important;
+  }
+  .status-badge.payment-recieved{
+    font-size: 12px !important;
+    padding: 5px 10px !important;
+  }
+  .header-meta{
+   align-items: flex-start !important;
+  }
+  .comments-section h2{
+    font-size: 15px !important;
+  }
+  .comments-section{
+    margin-top: 2px !important;
+  }
+  .progress-section {
+    width: 98vw !important;
+    max-width: 100vw !important;
+    margin-left: -1vw !important;
+    margin-right: -1vw !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+  .timeline-list {
+    padding-left: 0.5rem !important;
+    margin-top: 0 !important;
+  }
+  .timeline-item {
+    padding-left: 0.5rem !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .progress-steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .progress-step {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .step-dot {
+    margin: 0;
+  }
+  .progress-bar {
+    padding: 0 !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    min-height: 80px !important;
+    box-sizing: border-box;
+  }
+  .step-circle {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  .step-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+  .step-label {
+    font-size: 7px !important;
+    width: 100% !important;
+    display: block !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+  }
+  .step-label.two-line {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  .progress-step.five-step .step-label {
+    font-size: 8px !important;
+    width: 100% !important;
+    display: block !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+  }
+  .step-label.two-line {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  .progress-step.five-step:nth-child(2) .step-circle,
+  .progress-step.five-step:nth-child(3) .step-circle {
+    margin-bottom: 0 !important;
+  }
+  .progress-step.five-step:nth-child(1) .step-circle,
+  .progress-step.five-step:nth-child(4) .step-circle,
+  .progress-step.five-step:nth-child(5) .step-circle {
+    margin-top: 0px !important;
+  }
+  .timeline-date .date {
+    font-size: 10px !important;
+  }
+  .timeline-date .time {
+    font-size: 8px !important;
+  }
+  .timeline-content p {
+    font-size: 9px !important;
+  }
+}
+
+.tracking-page {
+  margin-left: 250px;
+  min-height: 100vh;
+  background-color: white;
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+.tracking-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.back-button:hover {
+  color: #333;
+}
+
+.admin-manage-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-manage-button:hover {
+  background-color: #388E3C;
+}
+
+.tracking-page-content {
+  width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Application Header */
+.application-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.header-main h1 {
+  font-size: 1.75rem;
+  color: #333;
+  margin: 0;
+}
+
+.header-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.reference-number {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
+.submission-info {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-badge.under-review {
+  background-color: #E3F2FD;
+  color: #1976D2;
+}
+
+.status-badge.approved {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+
+.status-badge.rejected {
+  background-color: #FFEBEE;
+  color: #C62828;
+}
+
+.status-badge.needs-revision {
+  background-color: #FFF3E0;
+  color: #E65100;
+}
+
+/* Admin Management Modal */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.admin-modal {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.admin-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.admin-modal-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.admin-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.admin-modal-close:hover {
+  color: #333;
+}
+
+.admin-modal-content {
+  margin-bottom: 2rem;
+}
+
+.admin-modal-section {
+  margin-bottom: 1.5rem;
+}
+
+.admin-modal-section h3 {
+  font-size: 1.125rem;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.admin-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #E0E0E0;
+}
+
+.admin-modal-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-modal-button.primary {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+.admin-modal-button.primary:hover {
+  background-color: #388E3C;
+}
+
+.admin-modal-button.secondary {
+  background-color: white;
+  color: #666;
+  border: 1px solid #E0E0E0;
+}
+
+.admin-modal-button.secondary:hover {
+  background-color: #F5F5F5;
+  border-color: #999;
+  color: #333;
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #E0E0E0;
+}
+
+.comments-section h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment-item {
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.comment-item.revision {
+  background-color: #FFF3E0;
+  border-left: 4px solid #E65100;
+}
+
+.comment-item.rejected {
+  background-color: #FFEBEE;
+  border-left: 4px solid #C62828;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.comment-user {
+  font-weight: 500;
+  color: #333;
+}
+
+.comment-timestamp {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.comment-content h4 {
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.comment-content p {
+  color: #666;
+  margin: 0;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.no-comments {
+  text-align: center;
+  padding: 2rem;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  color: #666;
+}
+
+/* Resubmission Area */
+.resubmission-area {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #FFF3E0;
+  border-radius: 8px;
+  border: 1px solid #FFE0B2;
+}
+
+.resubmission-header {
+  margin-bottom: 1.5rem;
+}
+
+.resubmission-header h3 {
+  color: #E65100;
+  margin-bottom: 0.5rem;
+}
+
+.resubmission-header p {
+  color: #666;
+}
+
+.file-upload-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #FFB74D;
+}
+
+.file-upload-section h4 {
+  font-size: 1.1rem;
+  color: #E65100;
+  margin-bottom: 1rem;
+}
+
+.file-upload-container {
+  padding: 2rem;
+  border: 2px dashed #FFB74D;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-upload-container:hover {
+  border-color: #E65100;
+  background-color: #FFF8E1;
+}
+
+.file-upload-container.dragging {
+  border-color: #E65100;
+  background-color: #FFF8E1;
+  box-shadow: 0 0 10px rgba(230, 81, 0, 0.2);
+}
+
+.file-upload-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.upload-icon {
+  font-size: 2.5rem;
+  color: #FFB74D;
+  margin-bottom: 1rem;
+}
+
+.upload-text {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.browse-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #E65100;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.browse-button:hover {
+  background-color: #EF6C00;
+}
+
+.selected-files-container {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.selected-files-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.selected-file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #F5F5F5;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.selected-file-item:last-child {
+  margin-bottom: 0;
+}
+
+.file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 0.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.file-size {
+  color: #666;
+  font-size: 0.85rem;
+  margin-right: 1rem;
+}
+
+.remove-file-btn {
+  background: none;
+  border: none;
+  color: #E65100;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.remove-file-btn:hover {
+  background-color: #FFEBEE;
+  color: #D32F2F;
+}
+
+.resubmit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #E65100;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resubmit-button:hover:not(:disabled) {
+  background-color: #EF6C00;
+}
+
+.resubmit-button:disabled {
+  background-color: #FFB74D;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Loading and Error States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  text-align: center;
+  padding: 2rem;
+  background-color: #FFEBEE;
+  border-radius: 8px;
+  color: #C62828;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+  .tracking-page-content {
+    width: 100%;
+    margin: 0;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tracking-page {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .tracking-page-content {
+    padding: 1.5rem;
+  }
+
+  .header-main {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header-meta {
+    align-items: flex-start;
+  }
+
+  .progress-bar {
+    padding: 0 0.5rem !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    min-height: 80px !important;
+    box-sizing: border-box;
+  }
+
+  .step-circle {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .step-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .step-label {
+    font-size: 7px !important;
+    width: 100% !important;
+    display: block !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+  }
+  .step-label.two-line {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  .timeline-item {
+    gap: 1rem;
+  }
+
+  .timeline-date {
+    min-width: 90px;
+  }
+
+  .admin-modal {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .timeline-list {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-item {
+    padding-left: 1.5rem;
+  }
+
+  .progress-steps {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    justify-content: space-around !important;
+    gap: 18px !important;
+  }
+  .progress-step {
+    flex: 1 1 0;
+    min-width: 0;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  .progress-step.five-step:nth-child(2) .step-circle,
+  .progress-step.five-step:nth-child(3) .step-circle {
+    margin-bottom: 0 !important;
+  }
+  .tracking-page-header {
+    justify-content: flex-end !important;
+  }
+  .back-button {
+    margin-left: 150px !important;
+    font-size: 15px !important;
+  }
+  .tracking-page-content{
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+}
+
+/* Make the progress line fill red for rejected applications */
+.progress-line-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 3px;
+  background: #4CAF50;
+  transform: translateY(-50%);
+  transition: width 0.3s ease;
+  z-index: 2;
+}
+
+/* Override for rejected applications */
+.tracking-page-content:has(.status-badge.rejected) .progress-line-fill {
+  background: #f44336;
+}
+
+/* Progress Bar Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(33, 150, 243, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply animations to elements */
+.progress-line-fill {
+  animation: progressFill 1.5s ease-out forwards;
+}
+
+.progress-step {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+.progress-step:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.progress-step:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.progress-step:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.progress-step.active .step-circle {
+  animation: pulse 2s infinite;
+}
+
+.progress-step.completed .step-circle svg {
+  animation: bounce 1s 0.5s ease;
+}
+
+.progress-step.rejected .step-circle svg {
+  animation: rotate 0.5s ease;
+}
+
+/* Timeline animation */
+.timeline-item {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-item:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.timeline-item:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.timeline-item:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+/* Update hover effects */
+.step-circle {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.progress-step:hover .step-circle {
+  transform: scale(1.1);
+}
+
+.progress-step:hover .step-label {
+  transform: translateY(2px);
+}
+
+/* Enhanced pulse animations for different states */
+@keyframes blueStepPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes redStepPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.25);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(244, 67, 54, 0);
+    transform: scale(1.08);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.25);
+    transform: scale(1);
+  }
+}
+
+@keyframes greenStepPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Current step indicator - blue by default (Under Review) */
+.progress-step.current .step-circle {
+  animation: blueStepPulse 2s infinite;
+  border-color: #2196F3;
+  background: #E3F2FD;
+}
+
+.progress-step.current .step-circle svg {
+  color: #2196F3;
+}
+
+.progress-step.current .step-label {
+  color: #2196F3;
+  font-weight: 600;
+}
+
+/* Rejected style - red pulse */
+.progress-step.rejected.current .step-circle {
+  animation: redStepPulse 2s infinite !important;
+  border-color: #f44336 !important;
+  background: #ffebee !important;
+  box-shadow: 0 0 0 4px rgba(244, 67, 54, 0.25) !important;
+}
+
+.progress-step.rejected.current .step-circle svg {
+  color: #f44336;
+}
+
+/* Approved style - green pulse */
+.progress-step.current.completed .step-circle {
+  animation: greenStepPulse 2s infinite;
+  border-color: #4CAF50;
+  background: #E8F5E9;
+}
+
+.progress-step.current.completed .step-circle svg {
+  color: #4CAF50;
+}
+
+/* Update animation for steps */
+.progress-step.current {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+/* Replace currentStepPulse with the appropriate animation (no outer glow) */
+.progress-step.current .step-circle {
+  animation: blueStepPulse 2s infinite;
+}
+
+.progress-step.rejected.current .step-circle {
+  animation: redStepPulse 2s infinite;
+}
+
+.progress-step.completed.current .step-circle {
+  animation: greenStepPulse 2s infinite;
+}
+
+/* Progress line segments */
+.progress-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+}
+
+/* Primary progress line (green) */
+.progress-line-fill.primary {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8%; /* First segment only */
+  height: 3px;
+  background: #4CAF50;
+  transform: translateY(-50%);
+  animation: progressFill 1.5s ease-out forwards;
+  z-index: 2;
+}
+
+/* Secondary progress line (green or red) */
+.progress-line-fill.secondary {
+  position: absolute;
+  top: 50%;
+  left: 8%; /* Start from first segment */
+  width: 0;
+  height: 3px;
+  background: #4CAF50; /* Default green */
+  transform: translateY(-50%);
+  animation: progressFillDelayed 1.5s ease-out 0.2s forwards;
+  z-index: 2;
+}
+
+/* Rejected style for second segment */
+.progress-line-fill.secondary.rejected {
+  background: #f44336; /* Red for rejected */
+}
+
+@keyframes progressFillDelayed {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 92%; /* Fill remaining 92% (from 8% to 100%) */
+  }
+}
+
+/* Update animation for steps */
+.progress-step.current {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+/* Override for rejected step */
+.progress-step.rejected.current .step-circle {
+  animation: redStepPulse 2s infinite;
+}
+
+.progress-step.completed.current .step-circle {
+  animation: greenStepPulse 2s infinite;
+}
+
+/* Add the following styles after the existing progress-line-fill styles */
+.progress-line-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 3px;
+  background: #4CAF50;
+  transform: translateY(-50%);
+  transition: width 0.3s ease;
+  z-index: 2;
+}
+
+/* Adjust positions for the progress steps */
+.progress-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+  min-height: 120px;
+  background: transparent;
+}
+
+/* Position of progress steps */
+.progress-step:nth-child(3) {
+  position: relative;
+  left: 0;
+}
+
+.progress-step:nth-child(4) {
+  position: relative;
+  left: 0;
+}
+
+.progress-step:nth-child(5) {
+  position: relative;
+  left: 0;
+}
+
+/* Progress line fill for different statuses */
+.progress-line-fill.submitted {
+  width: 8% !important;
+}
+
+.progress-line-fill.under-review, .progress-line-fill.needs-revision {
+  width: 50% !important;
+}
+
+.progress-line-fill.approved, .progress-line-fill.rejected {
+  width: 100% !important;
+}
+
+/* Override for rejected applications */
+
+/* Needs Revision style - orange alert */
+.progress-step.needs-revision .step-circle {
+  border-color: #FFA000 !important;
+  background: #FFF8E1 !important;
+}
+
+.progress-step.needs-revision .step-circle svg {
+  color: #FFA000 !important;
+}
+
+.progress-step.needs-revision .step-label {
+  color: #FFA000 !important;
+  font-weight: 600;
+}
+
+/* Needs Revision current step - orange pulse */
+.progress-step.needs-revision.current .step-circle {
+  animation: orangeStepPulse 2s infinite;
+  border-color: #FFA000 !important;
+  background: #FFF8E1 !important;
+  box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.35), 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+
+@keyframes orangeStepPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Override for rejected applications */
+
+/* Comments Show More/Less Buttons */
+.show-more-comments,
+.show-less-comments {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 16px;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  color: #4CAF50;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.show-more-comments:hover,
+.show-less-comments:hover {
+  background-color: #e8f5e9;
+  border-color: #4CAF50;
+}
+
+@keyframes superRedPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.25);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(244, 67, 54, 0);
+    transform: scale(1.08);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.25);
+    transform: scale(1);
+  }
+}
+
+div.progress-step.rejected.current > .step-circle {
+  animation: superRedPulse 2s infinite !important;
+  border-color: #f44336 !important;
+  background: #ffebee !important;
+}
+
+.progress-bar.five-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 32px 0 24px 0;
+  position: relative;
+}
+
+.progress-step.five-step {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 0;
+}
+
+.progress-step.five-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  z-index: 0;
+  transform: translateY(-50%);
+  left: 50%;
+}
+
+.progress-step.five-step .step-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  color: #bdbdbd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.45rem;
+  
+  z-index: 1;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.2s;
+}
+
+/* All completed (done) steps: green */
+.progress-step.five-step.completed .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.completed .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Submitted: green */
+.progress-step.five-step.submitted .step-circle,
+.progress-step.five-step.completed.submitted .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.submitted .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Under Review: blue */
+.progress-step.five-step.under-review .step-circle,
+.progress-step.five-step.current.under-review .step-circle {
+  background: #1976d2 !important;
+  border-color: #1976d2 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.under-review .step-label,
+.progress-step.five-step.current.under-review .step-label {
+  color: #1976d2 !important;
+  font-weight: 700;
+}
+
+/* Needs Revision: yellow/orange, hollow unless completed */
+.progress-step.five-step.needs-revision .step-circle {
+  border-color: #ffb300 !important;
+  background: #fff !important;
+  color: #ffb300 !important;
+}
+.progress-step.five-step.needs-revision .step-label {
+  color: #bfa100 !important;
+  font-weight: 700;
+}
+
+/* Completed Needs Revision: solid yellow/orange */
+.progress-step.five-step.completed.needs-revision .step-circle {
+  background: #ffb300 !important;
+  border-color: #ffb300 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.completed.needs-revision .step-label {
+  color: #bfa100 !important;
+  font-weight: 700;
+}
+
+/* Payment Pending: yellow */
+.progress-step.five-step.payment-pending .step-circle,
+.progress-step.five-step.current.payment-pending .step-circle {
+  background: #ffe066 !important;
+  border-color: #ffe066 !important;
+  color: #7a5d00 !important;
+}
+.progress-step.five-step.payment-pending .step-label,
+.progress-step.five-step.current.payment-pending .step-label {
+  color: #bfa100 !important;
+  font-weight: 700;
+}
+
+/* Payment Recieved: green */
+.progress-step.five-step.payment-recieved .step-circle,
+.progress-step.five-step.current.payment-recieved .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.payment-recieved .step-label,
+.progress-step.five-step.current.payment-recieved .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Payment Failed: red */
+.progress-step.five-step.payment-failed .step-circle,
+.progress-step.five-step.current.payment-failed .step-circle {
+  background: #e53935 !important;
+  border-color: #e53935 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.payment-failed .step-label,
+.progress-step.five-step.current.payment-failed .step-label {
+  color: #e53935 !important;
+  font-weight: 700;
+}
+
+/* Inspecting: blue */
+.progress-step.five-step.inspecting .step-circle,
+.progress-step.five-step.current.inspecting .step-circle {
+  background: #1976d2 !important;
+  border-color: #1976d2 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.inspecting .step-label,
+.progress-step.five-step.current.inspecting .step-label {
+  color: #1976d2 !important;
+  font-weight: 700;
+}
+
+/* Approved: green */
+.progress-step.five-step.approved .step-circle,
+.progress-step.five-step.current.approved .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.approved .step-label,
+.progress-step.five-step.current.approved .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Current step: glowing outline in step color */
+.progress-step.five-step.current .step-circle {
+  background: #1976d2 !important; /* Blue for Under Review */
+  border-color: #1976d2 !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 6px rgba(25, 118, 210, 0.18), 0 2px 8px rgba(0,0,0,0.04);
+  filter: none;
+}
+.progress-step.five-step.current.under-review .step-circle {
+  box-shadow: 0 0 0 6px rgba(25, 118, 210, 0.25), 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-step.five-step.current.needs-revision .step-circle {
+  background: #fff !important;
+  border-color: #ffb300 !important;
+  color: #ffb300 !important;
+  box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.35), 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+.progress-step.five-step.current.payment-pending .step-circle {
+  box-shadow: 0 0 0 6px rgba(255, 224, 102, 0.25), 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-step.five-step.current.payment-recieved .step-circle {
+  box-shadow: 0 0 0 6px rgba(67,160,71,0.18), 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-step.five-step.current.payment-failed .step-circle {
+  box-shadow: 0 0 0 6px rgba(229, 57, 53, 0.25), 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-step.five-step.current.inspecting .step-circle {
+  box-shadow: 0 0 0 6px rgba(25, 118, 210, 0.25), 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-step.five-step.current.approved .step-circle {
+  box-shadow: 0 0 0 6px rgba(67,160,71,0.18), 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Incomplete/unreached steps: faded */
+.progress-step.five-step:not(.completed):not(.current) .step-circle {
+  background: #f5f5f5 !important;
+  color: #bdbdbd !important;
+  border-color: #e0e0e0 !important;
+  filter: grayscale(0.5) brightness(1.1);
+}
+.progress-step.five-step:not(.completed):not(.current) .step-label {
+  color: #888 !important;
+  font-weight: 500;
+}
+
+/* White background, soft shadow, rounded lines for progress bar */
+.progress-bar.five-steps {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 18px 24px 10px 24px;
+}
+
+.progress-bar.five-steps::before {
+  display: none !important;
+}
+
+/* --- Progress Steps: Enhanced Color and Style --- */
+.progress-step.five-step.current .step-circle {
+  background: #1976d2 !important; /* Blue for Under Review */
+  border-color: #1976d2 !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 6px rgba(25, 118, 210, 0.18), 0 2px 8px rgba(0,0,0,0.04);
+  filter: none;
+}
+.progress-step.five-step.current .step-circle svg {
+  color: #fff !important;
+}
+.progress-step.five-step.current .step-label {
+  color: #1976d2 !important;
+  font-weight: 700;
+}
+
+/* Submitted: green */
+.progress-step.five-step.submitted .step-circle,
+.progress-step.five-step.completed.submitted .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.submitted .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Payment: yellow */
+.progress-step.five-step.payment-pending .step-circle,
+.progress-step.five-step.current.payment-pending .step-circle {
+  background: #ffe066 !important;
+  border-color: #ffe066 !important;
+  color: #7a5d00 !important;
+}
+.progress-step.five-step.payment-pending .step-label,
+.progress-step.five-step.current.payment-pending .step-label {
+  color: #bfa100 !important;
+  font-weight: 700;
+}
+
+/* Payment Recieved: green */
+.progress-step.five-step.payment-recieved .step-circle,
+.progress-step.five-step.current.payment-recieved .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.payment-recieved .step-label,
+.progress-step.five-step.current.payment-recieved .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Payment Failed: red */
+.progress-step.five-step.payment-failed .step-circle,
+.progress-step.five-step.current.payment-failed .step-circle {
+  background: #e53935 !important;
+  border-color: #e53935 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.payment-failed .step-label,
+.progress-step.five-step.current.payment-failed .step-label {
+  color: #e53935 !important;
+  font-weight: 700;
+}
+
+/* Inspecting: blue */
+.progress-step.five-step.inspecting .step-circle,
+.progress-step.five-step.current.inspecting .step-circle {
+  background: #1976d2 !important;
+  border-color: #1976d2 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.inspecting .step-label,
+.progress-step.five-step.current.inspecting .step-label {
+  color: #1976d2 !important;
+  font-weight: 700;
+}
+
+/* Approved: green */
+.progress-step.five-step.approved .step-circle,
+.progress-step.five-step.current.approved .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+}
+.progress-step.five-step.approved .step-label,
+.progress-step.five-step.current.approved .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Unreached steps: faded */
+.progress-step.five-step:not(.completed):not(.current) .step-circle {
+  background: #f5f5f5 !important;
+  color: #bdbdbd !important;
+  border-color: #e0e0e0 !important;
+  filter: grayscale(0.5) brightness(1.1);
+}
+.progress-step.five-step:not(.completed):not(.current) .step-label {
+  color: #888 !important;
+  font-weight: 500;
+}
+
+/* Force all completed steps to green, even if they have a status color class */
+.progress-step.five-step.completed .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.progress-step.five-step.completed .step-label {
+  color: #43a047 !important;
+  font-weight: 700 !important;
+}
+
+/* Make the progress line after a completed step green */
+.progress-step.five-step.completed:not(:last-child)::after {
+  background: #43a047 !important;
+}
+
+/* Endless loading animation for the progress line after the current done step */
+.progress-step.five-step.completed.current:not(:last-child)::after {
+  background: linear-gradient(90deg, #43a047 25%, #66bb6a 50%, #43a047 75%);
+  background-size: 200% 100%;
+  animation: progressLineShimmer 1.2s linear infinite;
+}
+
+@keyframes progressLineShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Shimmer animation for the progress line after the last completed step (robust, endlessly loading) */
+.progress-step.five-step.last-completed:not(:last-child)::after {
+  background: linear-gradient(90deg, #43a047 25%, #66bb6a 50%, #43a047 75%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% 0 !important;
+  animation: progressLineShimmer 1.2s linear infinite !important;
+  transition: none !important;
+}
+@keyframes progressLineShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* All steps: green border and label except needs revision */
+.progress-step.five-step:not(.needs-revision) .step-circle {
+  border-color: #43a047 !important;
+  background: #fff !important;
+  color: #43a047 !important;
+}
+.progress-step.five-step:not(.needs-revision) .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Needs Revision: yellow/orange */
+.progress-step.five-step.needs-revision .step-circle {
+  border-color: #ffb300 !important;
+  background: #fff !important;
+  color: #ffb300 !important;
+}
+.progress-step.five-step.needs-revision .step-label {
+  color: #bfa100 !important;
+  font-weight: 700;
+}
+
+/* Completed steps: solid green */
+.progress-step.five-step.completed .step-circle {
+  background: #43a047 !important;
+  border-color: #43a047 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.progress-step.five-step.completed .step-label {
+  color: #43a047 !important;
+  font-weight: 700 !important;
+}
+
+/* Current step: green border, white background, green icon */
+.progress-step.five-step.current:not(.completed):not(.needs-revision) .step-circle {
+  border-color: #43a047 !important;
+  background: #fff !important;
+  color: #43a047 !important;
+  box-shadow: 0 0 0 6px rgba(67, 160, 71, 0.18), 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-step.five-step.current:not(.completed):not(.needs-revision) .step-label {
+  color: #43a047 !important;
+  font-weight: 700;
+}
+
+/* Icon color for hollow steps */
+.progress-step.five-step:not(.completed) .step-circle svg {
+  color: #43a047 !important;
+}
+
+/* Icon color for completed steps */
+.progress-step.five-step.completed .step-circle svg {
+  color: #fff !important;
+}
+
+/* Icon color for hollow Needs Revision step */
+.progress-step.five-step.needs-revision:not(.completed) .step-circle svg {
+  color: #ffb300 !important;
+}
+/* Icon color for completed Needs Revision step */
+.progress-step.five-step.completed.needs-revision .step-circle svg {
+  color: #fff !important;
+}
+
+.shared-table,
+.application-table,
+.one-line-table {
+  table-layout: fixed !important;
+}
+
+.status-col, .status-col th, .status-col td {
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap !important;
+}
+
+/* Incomplete (not yet done) steps: gray border */
+.progress-step.five-step:not(.completed):not(.current) .step-circle {
+  border: 2.5px solid #bdbdbd !important;
+  background: #fff !important;
+  color: #bdbdbd !important;
+}
+
+/* Ongoing (current) step: green border */
+.progress-step.five-step.current .step-circle {
+  border: 2.5px solid #43a047 !important;
+  background: #00430d !important;
+  color: #43a047 !important;
+  box-shadow: 0 0 0 6px rgba(67, 160, 71, 0.18), 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.timeline-list .timeline-item:first-child .timeline-marker {
+  box-shadow: 0 0 0 6px rgba(140, 251, 117, 0.35), 0 2px 8px rgba(43, 255, 0, 0.08);
+  border: 2px solid #43a047;
+  animation: timelineMarkerGlow 1.5s infinite alternate;
+}
+
+@keyframes timelineMarkerGlow {
+  0% { box-shadow: 0 0 0 0 rgba(82, 150, 0, 0.35), 0 2px 8px rgba(86, 255, 2, 0.08); }
+  100% { box-shadow: 0 0 0 12px rgba(4, 255, 4, 0.18), 0 2px 8px rgba(3, 255, 41, 0.08); }
+}
+
+.timeline-marker::before {
+  opacity: 1 !important;
+  background: #e0e0e0 !important;
+} 

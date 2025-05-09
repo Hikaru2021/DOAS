@@ -1,0 +1,1655 @@
+/* Section Title Sizing - Forced Priority */
+.section-title {
+    color: #003366;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem !important;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+@media (max-width: 1200px) {
+    .section-title {
+        font-size: 3rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.2rem !important;
+        margin-bottom: 1.5rem;
+    }
+    .logo-text {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* General Styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.landingpage-body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.MainBody {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    padding-top: 70px; /* Height of the header */
+    position: relative;
+    z-index: 1;
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+.gov-header {
+    background-color: #003366;
+    color: white;
+    padding: 0.8rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 2rem 0 2rem;
+    gap: 2rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 60px;
+    margin-right: auto;
+    padding: 0;
+    gap: 1rem;
+}
+
+.gov-logo {
+    height: 50px;
+    width: auto;
+}
+
+.logo-text h1 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.logo-text p {
+    font-size: 0.8rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Navigation Styles */
+.nav-menu {
+    flex-grow: 1;
+    margin: 0 2rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+    width: 100%;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+    min-width: 200px;
+    justify-content: flex-end;
+}
+
+.login-btn, .signup-btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.login-btn {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.signup-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+}
+
+.login-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.signup-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Main Container */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Section Styles */
+section {
+    min-height: 100vh;
+    padding: 80px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#home {
+    padding: 0;
+    height: calc(100vh - 70px);
+    min-height: auto;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Hero Section with improved containment */
+.hero-section {
+    position: relative;
+    height: calc(100vh - 70px);
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    background-color: #003366; /* Fallback color in case images don't load */
+    box-sizing: border-box;
+}
+
+.carousel-slide {
+    position: relative;
+    height: calc(100vh - 70px);
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Carousel slide image without hover effect */
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: none;
+    display: block; /* Ensure images display as block elements */
+    max-width: 100%;
+}
+
+/* Remove the hover transform effect */
+.carousel-slide:hover img {
+    transform: none;
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);
+    z-index: 2;
+}
+
+/* Carousel Container */
+.slick-slider {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+}
+
+.slick-list,
+.slick-track {
+    height: 100%;
+    width: 100%;
+}
+
+.slick-slide {
+    height: 100%;
+}
+
+.slick-slide > div {
+    height: 100%;
+    width: 100%;
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    max-width: 600px;
+    color: white;
+    padding: 2rem;
+    z-index: 3;
+    text-align: left;
+}
+
+.slide-icon {
+    background-color: #4CAF50;
+    color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.slide-icon svg {
+    font-size: 2rem;
+}
+
+.slide-content h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    line-height: 1.1;
+}
+
+.slide-content p {
+    font-size: 1.4rem;
+    margin: 0 0 2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.slide-cta {
+    margin-top: 2rem;
+}
+
+.cta-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    background-color: #388e3c;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.btn-icon {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .btn-icon {
+    transform: translateX(5px);
+}
+
+/* Custom Arrows - single set */
+.custom-arrow {
+    z-index: 20 !important;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: none !important;
+    width: auto;
+    height: auto;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.nav-circle {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Arrow positions */
+.slick-prev {
+    left: 30px;
+    z-index: 10;
+}
+
+.slick-next {
+    right: 30px;
+    z-index: 10;
+}
+
+.slick-arrow svg {
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Custom Dots - moved up slightly */
+.custom-dots-container {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    z-index: 20;
+}
+
+.custom-dots {
+    display: inline-flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    padding: 8px 15px;
+    backdrop-filter: blur(4px);
+}
+
+.custom-dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+li.slick-active .custom-dot {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .slide-content h2 {
+        font-size: 3rem;
+    }
+
+    .slide-content p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .slide-content {
+        left: 5%;
+        max-width: 500px;
+    }
+    
+    .slide-content h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body, html {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .gov-header {
+        margin-top: 0 !important;
+        top: 0 !important;
+    }
+    .header-container {
+        padding: 0 !important;
+    }
+    .MainBody {
+        padding-top: 0 !important;
+    }
+    .logo-text h1 {
+        font-size: 0.75rem !important;
+        margin: 0 !important;
+        line-height: 1.1 !important;
+    }
+    .logo-text p {
+        font-size: 0.6rem !important;
+        margin: 0 !important;
+    }
+    .mobile-menu-toggle {
+        display: block;
+        position: relative;
+        top: 0;
+        right: 0;
+        z-index: 1001;
+        margin-left: auto;
+    }
+    .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100vw;
+        height: calc(100vh - 60px);
+        background: rgba(0, 51, 102, 0.97);
+        padding: 2rem 1rem 1rem 1rem;
+        transition: left 0.3s ease-in-out;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+    .nav-menu.mobile-menu-open {
+        left: 0;
+    }
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .nav-item {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+        width: 100%;
+        text-align: left;
+    }
+    .auth-buttons {
+        position: fixed;
+        bottom: 2rem;
+        left: 0;
+        width: 100vw;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 999;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+    }
+    .auth-buttons.mobile-menu-open {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .login-btn, .signup-btn {
+        width: 45%;
+        text-align: center;
+    }
+    .slide-content {
+        padding: 4rem 1rem 3rem;
+    }
+    .slide-content h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    .slide-content p {
+        font-size: 1rem;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    section {
+        padding: 60px 1rem;
+    }
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    .feature-card {
+        padding: 1.5rem;
+    }
+    .feature-card h3 {
+        font-size: 1.3rem;
+    }
+    .feature-card p {
+        font-size: 1rem;
+    }
+    .about-content {
+        padding: 1.5rem;
+    }
+    .about-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    .mission-vision {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .mission, .vision {
+        padding: 1.5rem;
+    }
+    .mission h3, .vision h3 {
+        font-size: 1.3rem;
+    }
+    .mission p, .vision p {
+        font-size: 1rem;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .service-card {
+        padding: 1.5rem;
+    }
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+    .service-card p {
+        font-size: 1rem;
+    }
+    .contact-info {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    .contact-details h3, .office-hours h3 {
+        font-size: 1.3rem;
+    }
+    .contact-details p, .office-hours p {
+        font-size: 1rem;
+    }
+    .gov-footer {
+        padding: 2rem 1rem 1rem;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    .footer-section h3 {
+        font-size: 1.2rem;
+    }
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .footer-section ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .slide-content p {
+        font-size: 0.9rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .slide-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .slide-icon svg {
+        font-size: 1.5rem;
+    }
+
+    .nav-circle {
+        width: 35px;
+        height: 35px;
+    }
+
+    .slick-arrow svg {
+        font-size: 14px;
+    }
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.feature-card h3 {
+    color: #003366;
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* About Section */
+.about-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.about-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 2.5rem;
+}
+
+.mission-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.mission, .vision {
+    background: #f8f9fa;
+    padding: 2.5rem;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.mission:hover, .vision:hover {
+    transform: translateY(-5px);
+}
+
+.mission h3, .vision h3 {
+    color: #003366;
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+}
+
+.mission p, .vision p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.service-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.service-card h3 {
+    color: #003366;
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+}
+
+.service-card p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+/* Contact Section */
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.contact-details h3, .office-hours h3 {
+    color: #003366;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+}
+
+.contact-details p, .office-hours p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Section Titles */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: #4CAF50;
+}
+
+/* Footer Styles */
+.gov-footer {
+    background-color: #003366;
+    color: white;
+    padding: 4rem 0 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #4CAF50;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 1rem;
+}
+
+.footer-section button,
+.footer-section a {
+    background: none;
+    border: none;
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-section button:hover,
+.footer-section a:hover {
+    opacity: 1;
+    color: #4CAF50;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    font-size: 1.8rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Scroll Progress */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    z-index: 1001;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    background: #4CAF50;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .header-container {
+        padding: 0 1.5rem;
+    }
+
+    .slide-content h2 {
+        font-size: 3rem;
+    }
+
+    .slide-content p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .header-container {
+        padding: 0 1rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .feature-card, .service-card {
+        padding: 2rem;
+    }
+
+    .slide-content h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .MainBody {
+        padding-top: 140px;
+    }
+
+    .gov-header {
+        height: auto;
+        padding: 0.5rem 0;
+    }
+
+    .header-container {
+        flex-direction: column;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+        min-width: auto;
+        gap: 0.5rem;
+    }
+
+    .gov-logo {
+        height: 40px;
+    }
+
+    .logo-text h1 {
+        font-size: 0.9rem;
+    }
+
+    .logo-text p {
+        font-size: 0.7rem;
+    }
+
+    .nav-menu {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .nav-item {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    .auth-buttons {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .login-btn, .signup-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Mobile Hero Section */
+    .hero-section {
+        height: 60vh;
+    }
+
+    .carousel-slide {
+        height: 60vh;
+    }
+
+    .slide-content {
+        padding: 4rem 1rem 3rem;
+    }
+
+    .slide-content h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .slide-content p {
+        font-size: 1rem;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    /* Mobile Section Styles */
+    section {
+        padding: 60px 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Mobile Features Grid */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .feature-card p {
+        font-size: 1rem;
+    }
+
+    /* Mobile About Section */
+    .about-content {
+        padding: 1.5rem;
+    }
+
+    .about-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .mission-vision {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .mission, .vision {
+        padding: 1.5rem;
+    }
+
+    .mission h3, .vision h3 {
+        font-size: 1.3rem;
+    }
+
+    .mission p, .vision p {
+        font-size: 1rem;
+    }
+
+    /* Mobile Services Section */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .service-card {
+        padding: 1.5rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .service-card p {
+        font-size: 1rem;
+    }
+
+    /* Mobile Contact Section */
+    .contact-info {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .contact-details h3, .office-hours h3 {
+        font-size: 1.3rem;
+    }
+
+    .contact-details p, .office-hours p {
+        font-size: 1rem;
+    }
+
+    /* Mobile Footer */
+    .gov-footer {
+        padding: 2rem 1rem 1rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-section ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .MainBody {
+        padding-top: 0;
+    }
+
+    .gov-header {
+        position: relative;
+    }
+
+    .hero-section {
+        height: 50vh;
+    }
+
+    .carousel-slide {
+        height: 50vh;
+    }
+
+    .slide-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .slide-content p {
+        font-size: 0.9rem;
+    }
+
+    .nav-circle {
+        width: 35px;
+        height: 35px;
+    }
+
+    .slick-arrow svg {
+        font-size: 14px;
+    }
+
+    .slick-prev {
+        left: 10px;
+    }
+
+    .slick-next {
+        right: 10px;
+    }
+
+    .slick-dots {
+        bottom: 15px;
+    }
+
+    .slick-dots li {
+        margin: 0 4px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .feature-card,
+    .service-card,
+    .mission,
+    .vision,
+    .about-content,
+    .contact-info {
+        padding: 1.25rem;
+    }
+}
+
+/* Landscape Mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .gov-header {
+        position: relative;
+        height: auto;
+    }
+
+    .MainBody {
+        padding-top: 0;
+    }
+
+    .hero-section,
+    .carousel-slide {
+        height: 100vh;
+    }
+
+    .slide-content {
+        padding: 3rem 1rem 2rem;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .auth-buttons {
+        flex-direction: row;
+    }
+}
+
+/* Ensure smooth transitions */
+* {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Reset transitions for specific properties */
+.slick-slide,
+.slick-slider,
+.carousel-slide img {
+    transition: none;
+}
+
+/* Carousel Transition */
+.slick-slider .slick-slide {
+    transition: opacity 1s ease-in-out;
+}
+
+/* Dots Navigation */
+.slick-dots {
+    bottom: 30px;
+    z-index: 10;
+}
+
+.slick-dots li {
+    margin: 0 8px;
+}
+
+.slick-dots li button {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+}
+
+.slick-dots li button:before {
+    color: white;
+    font-size: 12px;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Mobile Menu Styles */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1000;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 51, 102, 0.95);
+        padding: 80px 2rem 2rem;
+        transition: all 0.3s ease-in-out;
+        z-index: 999;
+    }
+
+    .nav-menu.mobile-menu-open {
+        left: 0;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .nav-item {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .auth-buttons {
+        position: fixed;
+        bottom: 2rem;
+        left: 0;
+        width: 100%;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 999;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .auth-buttons.mobile-menu-open {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .login-btn, 
+    .signup-btn {
+        width: 45%;
+        text-align: center;
+    }
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+    overflow: hidden;
+}
+
+/* Additional Mobile Responsive Improvements */
+@media (max-width: 768px) {
+    .MainBody {
+        padding-top: 60px;
+    }
+
+    .gov-header {
+        height: 60px;
+        padding: 0;
+    }
+
+    .logo-container {
+        padding-left: 1rem;
+    }
+
+    .logo-text h1 {
+        font-size: 0.85rem;
+    }
+
+    .logo-text p {
+        font-size: 0.65rem;
+    }
+
+    .hero-section,
+    .carousel-slide {
+        height: calc(100vh - 60px);
+    }
+
+    .slide-content {
+        padding: 3rem 1rem;
+    }
+
+    .slide-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .slide-content p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    section {
+        padding: 3rem 1rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-card,
+    .service-card,
+    .mission,
+    .vision {
+        padding: 1.25rem;
+    }
+
+    .feature-card h3,
+    .service-card h3,
+    .mission h3,
+    .vision h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .feature-card p,
+    .service-card p,
+    .mission p,
+    .vision p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .nav-item:hover::after {
+        width: 0;
+    }
+
+    .nav-item.active::after {
+        width: 100%;
+    }
+
+    .feature-card:hover,
+    .service-card:hover {
+        transform: none;
+    }
+
+    .nav-circle:hover {
+        transform: none;
+    }
+}
+
+/* Landscape Mode Optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+    .nav-menu {
+        padding: 60px 2rem 2rem;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .nav-item {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .auth-buttons {
+        position: static;
+        transform: none;
+        opacity: 1;
+        padding: 1rem 0;
+    }
+
+    .hero-section,
+    .carousel-slide {
+        height: calc(100vh - 60px);
+    }
+
+    .slide-content {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Hide default slick arrows but keep custom ones */
+.slick-prev:before, 
+.slick-next:before {
+    content: "" !important;
+    display: none !important;
+}
+
+/* Make sure only our custom arrows are visible */
+button.slick-arrow.slick-prev,
+button.slick-arrow.slick-next {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Custom Arrows - single set */
+.custom-arrow {
+    z-index: 20 !important;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: none !important;
+    width: auto;
+    height: auto;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.nav-circle {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Arrow positions */
+.slick-prev {
+    left: 30px;
+    z-index: 10;
+}
+
+.slick-next {
+    right: 30px;
+    z-index: 10;
+}
+
+.slick-arrow svg {
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .slick-prev {
+        left: 15px;
+    }
+
+    .slick-next {
+        right: 15px;
+    }
+
+    .slick-arrow svg {
+        font-size: 16px;
+    }
+}
+
