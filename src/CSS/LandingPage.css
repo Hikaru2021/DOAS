@@ -88,17 +88,18 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 2rem;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 10px;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    min-width: 60px;
+    min-width: 525px;
+    width: 600px;
     margin-right: auto;
     padding: 0;
     gap: 1rem;
@@ -202,6 +203,7 @@ body, html {
     padding: 0;
     gap: 2rem;
     justify-content: center;
+    width: 500px;
 }
 
 .nav-item {
@@ -236,7 +238,7 @@ body, html {
 .auth-buttons {
     display: flex;
     gap: 1rem;
-    min-width: 200px;
+    min-width: 300px;
     justify-content: flex-end;
 }
 
@@ -756,6 +758,10 @@ li.slick-active .custom-dot {
         padding: 0;
         margin: 0;
         gap: 0.3rem;
+        flex-direction: row;
+    }
+    .header-container h1 {
+        font-size: 15px;
     }
 }
 
