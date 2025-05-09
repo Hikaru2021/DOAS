@@ -172,6 +172,12 @@ function LandingPage() {
                             </div>
                         </div>
 
+                        {/* Mobile Title and Subtitle */}
+                        <div className="mobile-header-text">
+                            <h1>DENR Online Permit System</h1>
+                            <p>Baybay City, Leyte</p>
+                        </div>
+
                         {/* Mobile Menu Toggle */}
                         <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
                             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
