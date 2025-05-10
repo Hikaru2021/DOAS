@@ -171,10 +171,17 @@ const User = () => {
   };
 
   const filteredUsers = users.filter(
-    (user) =>
-      (user.user_name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (user.email || "").toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (statusFilter === 'all' || user.status === parseInt(statusFilter))
+    (user) => {
+      const matchesSearch = 
+        (user.user_name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (user.email || "").toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesStatus = 
+        statusFilter === 'all' || 
+        user.status === parseInt(statusFilter);
+      
+      return matchesSearch && matchesStatus;
+    }
   ).sort((a, b) => {
     switch (sortBy) {
       case "role":

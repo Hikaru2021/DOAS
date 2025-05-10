@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import '../CSS/Maps.css';
 import L from 'leaflet';
 import { supabase } from '../library/supabaseClient';
-import { FaMapMarkedAlt, FaSearchLocation, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
+import { FaMapMarkedAlt, FaSearchLocation, FaMapMarkerAlt, FaSearch, FaSearchPlus } from 'react-icons/fa';
 
 // Fix for default marker icons in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -116,7 +116,7 @@ const Maps = () => {
                         </MapContainer>
                     </div>
                     <div className="maps-list-panel">
-                        <h2 style={{ marginTop: 0 }}>Inspection List</h2>
+                        <h2 style={{ marginTop: 0 }}><FaSearchPlus style={{marginRight: '8px'}}/>Inspection List</h2>
                         <div className="maps-search-container">
                             <div className="maps-search-input-wrapper">
                                 <FaSearch className="maps-search-icon" />

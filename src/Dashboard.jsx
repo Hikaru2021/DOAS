@@ -780,7 +780,6 @@ function Dashboard() {
       <div className="dashboard-content">
         <div className="application-list-header">
           <h1 className={`application-list-title${isMobile ? ' dashboard-mobile-title' : ''}`} style={{ fontSize: '32px', fontWeight: 'bold' }}><MdDashboard style={{marginRight: '10px'}}/>Dashboard</h1>
-          <p className="application-list-subtitle" style={{ fontSize: '14px', color: 'gray' }}>View and analyze application statistics and reports</p>
         </div>
         <div className="dashboard-body">
           {/* Application Status Cards */}
@@ -905,12 +904,6 @@ function Dashboard() {
             <div className="dashboard-card dashboard-analytics">
               <div className="card-header">
                 <h3><FaChartBar style={{marginRight: '8px'}}/> {getAnalyticsTitle()}</h3>
-                <button 
-                  className="view-all-btn"
-                  onClick={() => navigate(getViewAllDestination())}
-                >
-                  View All <FaChevronRight />
-                </button>
               </div>
               <div className="dashboard-analytics-container">
                 <div className="chart-container">
