@@ -2240,22 +2240,25 @@ textarea.form-input {
   color: #e67e22;
 }
 
-.comment-text,
-.revision-text {
-  line-height: 1.5;
-  color: #333;
-  font-size: 0.95rem;
+.revision-text, .comment-text {
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding-left: 0.5em;
 }
 
-.comment-text p,
-.revision-text p {
-  margin-bottom: 8px;
+.revision-text ol, .revision-text ul,
+.comment-text ol, .comment-text ul {
+  margin-left: 1.5em;
+  padding-left: 1em;
+  word-break: break-word;
+  white-space: normal;
 }
 
-.comment-text ul,
-.revision-text ul {
-  padding-left: 20px;
-  margin-bottom: 8px;
+.revision-text li, .comment-text li {
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .no-comments {

@@ -1221,3 +1221,19 @@
     background-color: #E1BEE7;
     color: #8E24AA;
 }
+
+.box-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.sparkline-container {
+    margin-left: 10px;
+    min-width: 60px;
+    max-width: 70px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}

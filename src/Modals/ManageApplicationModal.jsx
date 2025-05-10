@@ -240,24 +240,7 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
         throw new Error('User application not found or invalid');
       }
 
-      // 1. Save revision comment to the comments table if status is 3
-      if (numericStatus === 3) {
-        const { data: revisionCommentData, error: revisionCommentError } = await supabase
-          .from('comments')
-          .insert([
-            {
-              user_applications_id: userApplication.id,
-              revision_comment: revisionInstructions,
-              comment_date: new Date().toISOString()
-            }
-          ])
-          .select();
-        if (revisionCommentError) {
-          throw new Error(`Error saving revision comment: ${revisionCommentError.message}`);
-        }
-      }
-
-      // 2. First, save the comment to the comments table
+      // Only insert one comment record per status update
       const commentData = {
         user_applications_id: userApplication.id,
         official_comment: comment,
@@ -276,7 +259,7 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
 
       console.log('Comment saved successfully:', commentResult);
 
-      // 3. Insert record into application_status_history table with predefined remarks
+      // Insert record into application_status_history table with predefined remarks
       const historyData = {
         user_application_id: userApplication.id,
         status_id: numericStatus,
@@ -294,7 +277,7 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
         console.log('Status history saved successfully:', historyResult);
       }
 
-      // 4. Update application status and deadlines
+      // Update application status and deadlines
       const updateData = { 
         status: numericStatus 
       };
@@ -322,7 +305,7 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
 
       console.log('Status updated successfully:', data);
 
-      // 5. Refresh comments list
+      // Refresh comments list
       await fetchComments(userApplication.id);
 
       // Create status update object for the parent component

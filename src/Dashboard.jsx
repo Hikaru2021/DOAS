@@ -5,6 +5,7 @@ import { FaUser, FaFileAlt, FaCheckCircle, FaTimesCircle, FaClock, FaChevronRigh
 import { supabase } from "./library/supabaseClient";
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -39,6 +40,17 @@ function Dashboard() {
   });
   const [totalApplications, setTotalApplications] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [statusTrends, setStatusTrends] = useState({
+    total: [],
+    pending: [],
+    needsRevision: [],
+    approved: [],
+    rejected: [],
+    payments: [],
+    inspecting: [],
+    completed: [],
+  });
+  const [allApplications, setAllApplications] = useState([]);
 
   // Fetch user and role information
   useEffect(() => {
@@ -165,6 +177,91 @@ function Dashboard() {
   }, [userRole, currentUser]);
 
   useEffect(() => {
+    const fetchTrendData = async () => {
+      let query = supabase
+        .from('user_applications')
+        .select('created_at, status');
+
+      if (userRole === 3 && currentUser) {
+        query = query.eq('user_id', currentUser.id);
+      }
+
+      const { data, error } = await query;
+      if (error) {
+        console.error("Error fetching trend data:", error);
+        return;
+      }
+
+      // Group by week (last 7 weeks)
+      const now = new Date();
+      const weeks = Array.from({ length: 7 }, (_, i) => {
+        const d = new Date(now);
+        d.setDate(d.getDate() - 7 * (6 - i));
+        d.setHours(0, 0, 0, 0);
+        return d;
+      });
+
+      const getWeekIndex = (date) => {
+        for (let i = weeks.length - 1; i >= 0; i--) {
+          if (date >= weeks[i]) return i;
+        }
+        return 0;
+      };
+
+      const trends = {
+        total: Array(7).fill(0),
+        pending: Array(7).fill(0),
+        needsRevision: Array(7).fill(0),
+        approved: Array(7).fill(0),
+        rejected: Array(7).fill(0),
+        payments: Array(7).fill(0),
+        inspecting: Array(7).fill(0),
+        completed: Array(7).fill(0),
+      };
+
+      data.forEach(app => {
+        const date = new Date(app.created_at);
+        const idx = getWeekIndex(date);
+        trends.total[idx]++;
+        switch (app.status) {
+          case 1:
+          case 2:
+            trends.pending[idx]++;
+            break;
+          case 3:
+            trends.needsRevision[idx]++;
+            break;
+          case 4:
+            trends.approved[idx]++;
+            break;
+          case 5:
+            trends.rejected[idx]++;
+            break;
+          case 6:
+          case 7:
+          case 8:
+            trends.payments[idx]++;
+            break;
+          case 9:
+            trends.inspecting[idx]++;
+            break;
+          case 10:
+            trends.completed[idx]++;
+            break;
+          default:
+            break;
+        }
+      });
+
+      setStatusTrends(trends);
+    };
+
+    if (userRole !== null) {
+      fetchTrendData();
+    }
+  }, [userRole, currentUser]);
+
+  useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -245,6 +342,9 @@ function Dashboard() {
       }
     ]
   };
+
+  // Sparkline data for each card (mock/hardcoded for now)
+  const sparklineData = statusTrends;
 
   // Chart options
   const chartOptions = {
@@ -575,6 +675,94 @@ function Dashboard() {
     }
   };
 
+  // Fetch all applications for monthly comparison
+  useEffect(() => {
+    const fetchAllApplications = async () => {
+      let query = supabase
+        .from('user_applications')
+        .select('created_at, status');
+      if (userRole === 3 && currentUser) {
+        query = query.eq('user_id', currentUser.id);
+      }
+      const { data, error } = await query;
+      if (!error && data) setAllApplications(data);
+    };
+    if (userRole !== null) fetchAllApplications();
+  }, [userRole, currentUser]);
+
+  // Helper to get the count for this month and last month for each status
+  const getMonthlyStatusDiffs = (data) => {
+    // Get the first day of this month and last month
+    const now = new Date();
+    const firstDayThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const firstDayLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    // Initialize counters
+    const statusThisMonth = {
+      total: 0, pending: 0, needsRevision: 0, approved: 0, rejected: 0, payments: 0, inspecting: 0, completed: 0
+    };
+    const statusLastMonth = {
+      total: 0, pending: 0, needsRevision: 0, approved: 0, rejected: 0, payments: 0, inspecting: 0, completed: 0
+    };
+    data.forEach(app => {
+      const date = new Date(app.created_at);
+      let statusKey = null;
+      switch (app.status) {
+        case 1:
+        case 2:
+          statusKey = 'pending';
+          break;
+        case 3:
+          statusKey = 'needsRevision';
+          break;
+        case 4:
+          statusKey = 'approved';
+          break;
+        case 5:
+          statusKey = 'rejected';
+          break;
+        case 6:
+        case 7:
+        case 8:
+          statusKey = 'payments';
+          break;
+        case 9:
+          statusKey = 'inspecting';
+          break;
+        case 10:
+          statusKey = 'completed';
+          break;
+        default:
+          break;
+      }
+      // Total
+      if (date >= firstDayThisMonth) statusThisMonth.total++;
+      else if (date >= firstDayLastMonth && date < firstDayThisMonth) statusLastMonth.total++;
+      // Status
+      if (statusKey) {
+        if (date >= firstDayThisMonth) statusThisMonth[statusKey]++;
+        else if (date >= firstDayLastMonth && date < firstDayThisMonth) statusLastMonth[statusKey]++;
+      }
+    });
+    // Calculate diffs
+    const diffs = {};
+    Object.keys(statusThisMonth).forEach(key => {
+      diffs[key] = statusThisMonth[key] - statusLastMonth[key];
+      diffs[key + '_this'] = statusThisMonth[key];
+      diffs[key + '_last'] = statusLastMonth[key];
+    });
+    return diffs;
+  };
+
+  const monthlyDiffs = getMonthlyStatusDiffs(allApplications);
+
+  // Helper to render the subtitle for each card
+  const renderMonthlyDiff = (diff, thisMonth) => {
+    if (thisMonth === 0) {
+      return `(${diff >= 0 ? '+' : ''}${diff}) compared to last month`;
+    }
+    return `${thisMonth} (${diff >= 0 ? '+' : ''}${diff}) compared to last month`;
+  };
+
   if (isLoading) {
     return (
       <div className="dashboard-container">
@@ -597,44 +785,116 @@ function Dashboard() {
           {/* Application Status Cards */}
           <div className="dashboard-boxes">
             <div className="box total" onClick={() => handleCardClick('all')}>
-              <h3>Total Applications</h3>
-              <p className="count">{totalApplications}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Total Applications</h3>
+                  <p className="count">{totalApplications}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.total, monthlyDiffs.total_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.total} width={60} height={30}>
+                    <SparklinesLine color="#64B5F6" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
             <div className="box pending" onClick={() => handleCardClick('Pending')}>
-              <h3>Pending Applications</h3>
-              <p className="count">{statusCounts.pending}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Pending Applications</h3>
+                  <p className="count">{statusCounts.pending}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.pending, monthlyDiffs.pending_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.pending} width={60} height={30}>
+                    <SparklinesLine color="#FFC107" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
             <div className="box needs-revision" onClick={() => handleCardClick('Needs Revision')}>
-              <h3>Needs Revision</h3>
-              <p className="count">{statusCounts.needsRevision}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Needs Revision</h3>
+                  <p className="count">{statusCounts.needsRevision}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.needsRevision, monthlyDiffs.needsRevision_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.needsRevision} width={60} height={30}>
+                    <SparklinesLine color="#FF7043" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
             <div className="box approved" onClick={() => handleCardClick('Approved')}>
-              <h3>Approved Applications</h3>
-              <p className="count">{statusCounts.approved}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Approved Applications</h3>
+                  <p className="count">{statusCounts.approved}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.approved, monthlyDiffs.approved_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.approved} width={60} height={30}>
+                    <SparklinesLine color="#43A047" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
             <div className="box rejected" onClick={() => handleCardClick('Rejected')}>
-              <h3>Rejected Applications</h3>
-              <p className="count">{statusCounts.rejected}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Rejected Applications</h3>
+                  <p className="count">{statusCounts.rejected}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.rejected, monthlyDiffs.rejected_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.rejected} width={60} height={30}>
+                    <SparklinesLine color="#E53935" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
             <div className="box payments" onClick={() => handleCardClick('Payments')}>
-              <h3>Payments</h3>
-              <p className="count">{statusCounts.payments}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Payments</h3>
+                  <p className="count">{statusCounts.payments}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.payments, monthlyDiffs.payments_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.payments} width={60} height={30}>
+                    <SparklinesLine color="#00897B" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
             <div className="box inspecting" onClick={() => handleCardClick('Inspecting')}>
-              <h3>Inspecting</h3>
-              <p className="count">{statusCounts.inspecting}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Inspecting</h3>
+                  <p className="count">{statusCounts.inspecting}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.inspecting, monthlyDiffs.inspecting_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.inspecting} width={60} height={30}>
+                    <SparklinesLine color="#1976D2" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
             <div className="box completed" onClick={() => handleCardClick('Completed')}>
-              <h3>Completed</h3>
-              <p className="count">{statusCounts.completed}</p>
-              <span>from this month</span>
+              <div className="box-content">
+                <div>
+                  <h3>Completed</h3>
+                  <p className="count">{statusCounts.completed}</p>
+                  <span>{renderMonthlyDiff(monthlyDiffs.completed, monthlyDiffs.completed_this)}</span>
+                </div>
+                <div className="sparkline-container">
+                  <Sparklines data={sparklineData.completed} width={60} height={30}>
+                    <SparklinesLine color="#8E24AA" />
+                  </Sparklines>
+                </div>
+              </div>
             </div>
           </div>
 
