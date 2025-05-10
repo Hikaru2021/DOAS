@@ -89,10 +89,12 @@ const Maps = () => {
                             {applications.map(app => {
                                 const [lat, lng] = app.location.split(',').map(Number);
                                 if (isNaN(lat) || isNaN(lng)) return null;
+                                const referenceNumber = `REF-${String(app.id).padStart(6, '0')}`;
                                 return (
                                     <Marker key={app.id} position={[lat, lng]}>
                                         <Popup>
                                             <strong>{app.full_name || 'No Name'}</strong><br />
+                                            Reference #: {referenceNumber}<br />
                                             {app.address || 'No Address'}
                                         </Popup>
                                     </Marker>
@@ -110,6 +112,7 @@ const Maps = () => {
                                     {applications.map(app => {
                                         const [lat, lng] = app.location.split(',').map(Number);
                                         if (isNaN(lat) || isNaN(lng)) return null;
+                                        const referenceNumber = `REF-${String(app.id).padStart(6, '0')}`;
                                         return (
                                             <li
                                                 className={`maps-app-list-item${selectedAppId === app.id ? ' selected' : ''}`}
@@ -120,6 +123,7 @@ const Maps = () => {
                                                     <span className="maps-app-list-icon" role="img" aria-label="location">📍</span>
                                                     <span className="maps-applicant-name">{app.full_name || 'No Name'}</span>
                                                 </div>
+                                                <div className="maps-app-list-ref">Reference #: {referenceNumber}</div>
                                                 <div className="maps-app-list-address">{app.address || 'No Address'}</div>
                                                 <div className="maps-app-list-coords">({lat.toFixed(5)}, {lng.toFixed(5)})</div>
                                             </li>

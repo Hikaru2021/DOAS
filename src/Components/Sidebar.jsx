@@ -4,6 +4,7 @@ import { supabase } from "../library/supabaseClient";
 import "../CSS/Sidebar.css";
 import "../CSS/SidebarProfile.css";
 import { FaChevronDown, FaTachometerAlt, FaUsers, FaClipboardList, FaChartBar, FaSignOutAlt, FaFolderOpen, FaList, FaUser, FaBook, FaMapMarkedAlt } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 
 const STORAGE_BUCKET = 'guidelines';
 
@@ -105,9 +106,9 @@ const Sidebar = () => {
           </button>
         )}
         <div className="sidebar-header">
-          <img src="/Logo1.png" alt="DENR GreenCertify" className="sidebar-logo" />
-          <h2 className="sidebar-title">DENR</h2>
-          <h2 className="sidebar-title">GREENCERTIFY</h2>
+          <img src="/Logo1.png" alt="DENR" className="sidebar-logo" />
+          <h2 className="sidebar-title">DENR-CENRO BAYBAY</h2>
+          <h2 className="sidebar-title">DOAS</h2>
         </div>
 
         <div className="sidebar-section">
@@ -115,7 +116,7 @@ const Sidebar = () => {
           <ul className="sidebar-menu">
             <li>
               <NavLink to="/Dashboard">
-                <FaTachometerAlt className="sidebar-icon" />
+                <MdDashboard className="sidebar-icon" />
                 <span>Dashboard</span>
               </NavLink>
             </li>

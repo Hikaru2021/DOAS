@@ -55,6 +55,7 @@ div.my-application-filters {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+  margin: 20px 0 !important;
 }
 
 .search-container {

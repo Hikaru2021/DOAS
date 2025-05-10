@@ -1209,6 +1209,7 @@
 .application-list-header,
 .application-list-filters {
   flex-shrink: 0;
+  margin-bottom: 20px !important;
 }
 
 .application-list-title {
