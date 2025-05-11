@@ -449,4 +449,49 @@
 
 .maps-modal-danger:hover {
     background: #4CAF50 !important;
+}
+
+@media (max-width: 600px) {
+    .maps-modal-container {
+        max-width: 95vw;
+        min-width: 0;
+        width: 100vw;
+        padding: 1.5rem 1rem 1.2rem 1rem;
+        border-radius: 8px;
+        font-size: 0.98rem;
+        box-sizing: border-box;
+    }
+    .maps-modal-header-row {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding-bottom: 0.3rem;
+        margin-bottom: 0.8rem;
+    }
+    .maps-modal-title {
+        font-size: 1.1rem;
+        flex: 1;
+    }
+    .maps-modal-close {
+        align-self: flex-start;
+        margin-left: auto;
+        margin-top: -0.3rem;
+        margin-right: -0.3rem;
+        font-size: 2rem;
+    }
+    .maps-modal-actions {
+        flex-direction: column;
+        gap: 0.7rem;
+        width: 100%;
+    }
+    .maps-modal-cancel, .maps-modal-confirm {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.7rem 0;
+    }
+    .maps-modal-warning {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.7rem;
+    }
 } 

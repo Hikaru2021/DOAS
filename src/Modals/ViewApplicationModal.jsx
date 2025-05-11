@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../library/supabaseClient";
 import PropTypes from 'prop-types';
 
-const ViewApplicationModal = ({ isOpen, onClose, application, onStartApplication }) => {
+const ViewApplicationModal = ({ isOpen, onClose, application, onStartApplication, userRole }) => {
   const [documents, setDocuments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -242,15 +242,17 @@ const ViewApplicationModal = ({ isOpen, onClose, application, onStartApplication
           >
             Cancel
           </button>
-          <button 
-            className="modal-button primary"
-            onClick={() => {
-              onStartApplication(application);
-              onClose();
-            }}
-          >
-            Start Application Process
-          </button>
+          {(userRole !== 2) && (
+            <button 
+              className="modal-button primary"
+              onClick={() => {
+                onStartApplication(application);
+                onClose();
+              }}
+            >
+              Start Application Process
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -269,7 +271,8 @@ ViewApplicationModal.propTypes = {
     processing_fee: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     requirements: PropTypes.arrayOf(PropTypes.string)
   }),
-  onStartApplication: PropTypes.func.isRequired
+  onStartApplication: PropTypes.func.isRequired,
+  userRole: PropTypes.number.isRequired
 };
 
 export default ViewApplicationModal; 

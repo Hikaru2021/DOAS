@@ -139,12 +139,15 @@ const Sidebar = () => {
                       <span>Application Catalog</span>
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to="/MyApplication">
-                      <FaFolderOpen className="sidebar-icon" />
-                      <span>My Applications</span>
-                    </NavLink>
-                  </li>
+                  {/* Only show My Applications for Admin (1), User (3), and Inspector (4) */}
+                  {(userProfile?.role_id === 1 || userProfile?.role_id === 3 || userProfile?.role_id === 4) && (
+                    <li>
+                      <NavLink to="/MyApplication">
+                        <FaFolderOpen className="sidebar-icon" />
+                        <span>My Applications</span>
+                      </NavLink>
+                    </li>
+                  )}
                 </ul>
               )}
             </li>
@@ -174,12 +177,15 @@ const Sidebar = () => {
                   </NavLink>
                 </li>
               )}
-              <li>
-                <NavLink to="/Maps">
-                  <FaMapMarkedAlt className="sidebar-icon" />
-                  <span>Maps</span>
-                </NavLink>
-              </li>
+              {/* Only show Maps for Admin (1) and Inspector (4) */}
+              {(userProfile?.role_id === 1 || userProfile?.role_id === 4) && (
+                <li>
+                  <NavLink to="/Maps">
+                    <FaMapMarkedAlt className="sidebar-icon" />
+                    <span>Maps</span>
+                  </NavLink>
+                </li>
+              )}
               {/* Hide Reports for role_id 3 and inspector (role_id 4) */}
               {userProfile?.role_id !== 3 && userProfile?.role_id !== 4 && (
                 <li>

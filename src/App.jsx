@@ -53,7 +53,7 @@ function App() {
           <Route path="Maps" element={
             <RoleProtectedRoute 
               element={<Maps />} 
-              allowedRoles={[1,2,4]} 
+              allowedRoles={[1,4]} 
             />
           } />
           <Route path="ApplicationCatalog" element={
@@ -65,7 +65,7 @@ function App() {
           <Route path="MyApplication" element={
             <RoleProtectedRoute 
               element={<MyApplication />} 
-              allowedRoles={[1,2,3,4]} 
+              allowedRoles={[1,3,4]} 
             />
           } />
           {/* Admin/Manager only routes */}

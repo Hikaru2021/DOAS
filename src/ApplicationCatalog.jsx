@@ -389,15 +389,17 @@ function ApplicationCatalog() {
                   </div>
                   <p className="card-description">{application.description}</p>
                   <div className="card-footer">
-                    <button 
-                      className="apply-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleStartApplication(application);
-                      }}
-                    >
-                      Apply Now
-                    </button>
+                    {(userRole !== 2) && (
+                      <button 
+                        className="apply-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleStartApplication(application);
+                        }}
+                      >
+                        Apply Now
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -414,6 +416,7 @@ function ApplicationCatalog() {
           }}
           application={selectedApplication}
           onStartApplication={handleStartApplication}
+          userRole={userRole}
         />
 
         <AddApplicationModal 
