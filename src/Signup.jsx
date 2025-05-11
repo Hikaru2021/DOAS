@@ -107,8 +107,10 @@ const Signup = () => {
           setIsLoading(false);
           // Navigate after showing checkmark for 1.5 seconds
           setTimeout(() => {
-            navigate('/login', { 
-              state: { message: 'Registration successful! Please login to continue.' }
+            navigate('/login', {
+              state: {
+                message: 'Registration successful! Please check your email for a verification link.'
+              }
             });
           }, 1500);
         }, 1000);

@@ -7,6 +7,7 @@ import "../CSS/forms.css";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "../CSS/ApplicationCatalog.css";
 
 // Supabase storage constants
 const STORAGE_BUCKET = 'guidelines';
@@ -49,7 +50,7 @@ function CenterMapToMarker({ lat, lng }) {
   return null;
 }
 
-const ApplicationSubmissionForm = ({ isOpen, onClose, application }) => {
+const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) => {
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
@@ -375,8 +376,10 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application }) => {
         await uploadFilesToStorage(user.id, applicationData[0].id);
       }
 
-      // Close the form after successful submission
+      // Call onSuccess prop if provided
+      if (onSuccess) onSuccess();
       onClose();
+      return;
     } catch (err) {
       setFormError(err.message);
       console.error('Error submitting application:', err);

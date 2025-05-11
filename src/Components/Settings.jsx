@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../library/supabaseClient';
 import '../CSS/Settings.css';
+import '../CSS/ApplicationCatalog.css';
 import { FaUser, FaEnvelope, FaLock, FaCamera, FaSave } from 'react-icons/fa';
 
 const STORAGE_BUCKET = 'guidelines';
@@ -20,6 +21,7 @@ const Settings = () => {
     new_password: '',
     confirm_password: '',
   });
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
     fetchUserProfile();
@@ -179,10 +181,7 @@ const Settings = () => {
       // Refresh user data
       await fetchUserProfile();
 
-      alert('Settings updated successfully!');
-      
-      // Reload the page after successful save
-      window.location.reload();
+      setToast({ show: true, message: 'Settings updated successfully!', type: 'success' });
     } catch (error) {
       console.error('Error updating settings:', error.message);
       alert(error.message);
@@ -191,12 +190,22 @@ const Settings = () => {
     }
   };
 
+  useEffect(() => {
+    if (toast.show) {
+      const timer = setTimeout(() => setToast({ ...toast, show: false }), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
   if (loading) {
     return <div className="settings-loading">Loading...</div>;
   }
 
   return (
     <div className="settings-container">
+      {toast.show && (
+        <div className={`toast-notification ${toast.type}`}>{toast.message}</div>
+      )}
       <div className="settings-header">
         <h1>Settings</h1>
         <p>Manage your account settings and preferences</p>

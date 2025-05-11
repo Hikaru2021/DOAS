@@ -185,7 +185,9 @@ const User = () => {
   ).sort((a, b) => {
     switch (sortBy) {
       case "role":
-        return a.role_id - b.role_id;
+        // Custom order: Admin (1), Manager (2), Inspector (4), User (3)
+        const roleOrder = { 1: 0, 2: 1, 4: 2, 3: 3 };
+        return (roleOrder[a.role_id] ?? 99) - (roleOrder[b.role_id] ?? 99);
       case "newest":
         return new Date(b.created_at) - new Date(a.created_at);
       case "oldest":

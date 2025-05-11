@@ -439,6 +439,7 @@ function ApplicationCatalog() {
             setSelectedApplicationForSubmission(null);
           }}
           application={selectedApplicationForSubmission}
+          onSuccess={() => setToast({ show: true, message: 'Application submitted successfully!', type: 'success' })}
         />
 
         {/* Delete Confirmation Modal */}
