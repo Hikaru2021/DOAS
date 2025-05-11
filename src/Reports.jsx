@@ -998,6 +998,7 @@ function Reports() {
           case 8: return 'Payment Failed';
           case 9: return 'Inspecting';
           case 10: return 'Completed';
+          case 11: return 'Inspected';
           default: return 'Unknown';
         }
       };
@@ -1064,6 +1065,7 @@ function Reports() {
         'Payment Recieved': 0,
         'Payment Failed': 0,
         'Inspecting': 0,
+        'Inspected': 0,
         'Completed': 0
       };
       
@@ -1260,6 +1262,7 @@ function Reports() {
       case 8: return 'Payment Failed';
       case 9: return 'Inspecting';
       case 10: return 'Completed';
+      case 11: return 'Inspected';
       default: return 'Unknown';
     }
   };
@@ -1320,7 +1323,13 @@ function Reports() {
       2: Array(12).fill(0), // Under Review
       3: Array(12).fill(0), // Needs Revision
       4: Array(12).fill(0), // Approved
-      5: Array(12).fill(0)  // Rejected
+      5: Array(12).fill(0), // Rejected
+      6: Array(12).fill(0), // Payment Pending
+      7: Array(12).fill(0), // Payment Recieved
+      8: Array(12).fill(0), // Payment Failed
+      9: Array(12).fill(0), // Inspecting
+      10: Array(12).fill(0), // Completed
+      11: Array(12).fill(0) // Inspected
     };
 
     // Filter for selected year if not "all"
@@ -1347,40 +1356,88 @@ function Reports() {
         {
           label: 'Submitted',
           data: monthlyStatusCounts[1],
-          borderColor: 'rgba(54, 162, 235, 1)',
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: '#42a5f5',
+          backgroundColor: 'rgba(66, 165, 245, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Under Review',
           data: monthlyStatusCounts[2],
-          borderColor: 'rgba(75, 192, 192, 1)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: '#26c6da',
+          backgroundColor: 'rgba(38, 198, 218, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Needs Revision',
           data: monthlyStatusCounts[3],
-          borderColor: 'rgba(255, 159, 64, 1)',
-          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          borderColor: '#ffa726',
+          backgroundColor: 'rgba(255, 167, 38, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Approved',
           data: monthlyStatusCounts[4],
-          borderColor: 'rgba(46, 204, 113, 1)',
-          backgroundColor: 'rgba(46, 204, 113, 0.2)',
+          borderColor: '#66bb6a',
+          backgroundColor: 'rgba(102, 187, 106, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Rejected',
           data: monthlyStatusCounts[5],
-          borderColor: 'rgba(255, 99, 132, 1)',
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: '#ef5350',
+          backgroundColor: 'rgba(239, 83, 80, 0.2)',
+          tension: 0.4,
+          fill: true
+        },
+        {
+          label: 'Payment Pending',
+          data: monthlyStatusCounts[6],
+          borderColor: '#ffd600',
+          backgroundColor: 'rgba(255, 214, 0, 0.2)',
+          tension: 0.4,
+          fill: true
+        },
+        {
+          label: 'Payment Recieved',
+          data: monthlyStatusCounts[7],
+          borderColor: '#43a047',
+          backgroundColor: 'rgba(67, 160, 71, 0.2)',
+          tension: 0.4,
+          fill: true
+        },
+        {
+          label: 'Payment Failed',
+          data: monthlyStatusCounts[8],
+          borderColor: '#d32f2f',
+          backgroundColor: 'rgba(211, 47, 47, 0.2)',
+          tension: 0.4,
+          fill: true
+        },
+        {
+          label: 'Inspecting',
+          data: monthlyStatusCounts[9],
+          borderColor: '#1976d2',
+          backgroundColor: 'rgba(25, 118, 210, 0.2)',
+          tension: 0.4,
+          fill: true
+        },
+        {
+          label: 'Inspected',
+          data: monthlyStatusCounts[11],
+          borderColor: '#2196f3',
+          backgroundColor: 'rgba(33, 150, 243, 0.2)',
+          tension: 0.4,
+          fill: true
+        },
+        {
+          label: 'Completed',
+          data: monthlyStatusCounts[10],
+          borderColor: '#00bfae',
+          backgroundColor: 'rgba(0, 191, 174, 0.2)',
           tension: 0.4,
           fill: true
         }
@@ -1685,6 +1742,9 @@ function Reports() {
                       case 3: statusBadgeClass = 'needs-revision'; break;
                       case 4: statusBadgeClass = 'approved'; break;
                       case 5: statusBadgeClass = 'denied'; break;
+                      case 9: statusBadgeClass = 'inspecting'; break;
+                      case 10: statusBadgeClass = 'completed'; break;
+                      case 11: statusBadgeClass = 'inspected'; break;
                       default: statusBadgeClass = 'pending';
                     }
                     
@@ -1695,7 +1755,7 @@ function Reports() {
                         <td>{app.purpose || 'N/A'}</td>
                         <td>{formatDateMMDDYYYY(app.created_at)}</td>
                         <td style={{ textAlign: 'center' }}>
-                          <span className={`status-badge ${statusBadgeClass}`}>
+                          <span className={`status-badge ${getStatusName(app.status).toLowerCase().replace(/ /g, '-')}`}>
                             {getStatusName(app.status)}
                           </span>
                         </td>

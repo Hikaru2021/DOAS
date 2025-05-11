@@ -134,6 +134,7 @@ function Dashboard() {
                 payments++;
                 break;
               case 9:
+              case 11:
                 inspecting++;
                 break;
               case 10:
@@ -244,6 +245,7 @@ function Dashboard() {
             trends.payments[idx]++;
             break;
           case 9:
+          case 11:
             trends.inspecting[idx]++;
             break;
           case 10:
@@ -288,7 +290,7 @@ function Dashboard() {
         statusFilter = [6, 7, 8];
         break;
       case 'Inspecting':
-        statusFilter = [9];
+        statusFilter = [9, 11];
         break;
       case 'Completed':
         statusFilter = [10];
@@ -551,6 +553,8 @@ function Dashboard() {
         return "Inspecting";
       case 10:
         return "Completed";
+      case 11:
+        return "Inspected";
       default:
         return "Unknown";
     }
@@ -575,6 +579,8 @@ function Dashboard() {
         return "dashboard-status-inspecting";
       case 10:
         return "dashboard-status-completed";
+      case 11:
+        return "dashboard-status-inspected";
       default:
         return "";
     }
@@ -672,6 +678,7 @@ function Dashboard() {
       case 8: return 'Payment Failed';
       case 9: return 'Inspecting';
       case 10: return 'Completed';
+      case 11: return 'Inspected';
       default: return 'Unknown';
     }
   };
@@ -727,6 +734,7 @@ function Dashboard() {
           statusKey = 'payments';
           break;
         case 9:
+        case 11:
           statusKey = 'inspecting';
           break;
         case 10:
