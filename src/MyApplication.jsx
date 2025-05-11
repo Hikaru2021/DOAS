@@ -141,6 +141,7 @@ function MyApplication() {
       case 8: return "Payment Failed";
       case 9: return "Inspecting";
       case 10: return "Completed";
+      case 11: return "Inspected";
       default: return "Unknown";
     }
   };
@@ -438,7 +439,7 @@ function MyApplication() {
       case "Payment Failed":
         return "status-badge payment-failed";
       case "Inspecting":
-        return "status-badge inspecting";
+        return "status-inspected";
       case "Completed":
         return "status-badge completed";
       default:
@@ -619,7 +620,7 @@ function MyApplication() {
                 <option value="Payment Pending">Payment Pending</option>
                 <option value="Payment Recieved">Payment Recieved</option>
                 <option value="Payment Failed">Payment Failed</option>
-                <option value="Inspecting">Inspecting</option>
+                <option value="Inspected">Inspected</option>
                 <option value="Completed">Completed</option>
               </select>
             </div>

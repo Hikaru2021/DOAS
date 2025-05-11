@@ -111,6 +111,7 @@ function ApplicationList() {
       case 8: return "Payment Failed";
       case 9: return "Inspecting";
       case 10: return "Completed";
+      case 11: return "Inspected";
       default: return "Unknown";
     }
   };
@@ -564,8 +565,8 @@ function ApplicationList() {
         return "status-badge payment-recieved";
       case "payment failed":
         return "status-badge payment-failed";
-      case "inspecting":
-        return "status-badge inspecting";
+      case "inspected":
+        return "status-badge inspected";
       case "completed":
         return "status-badge completed";
       default:
@@ -746,7 +747,7 @@ function ApplicationList() {
               <option value="Payment Pending">Payment Pending</option>
               <option value="Payment Recieved">Payment Recieved</option>
               <option value="Payment Failed">Payment Failed</option>
-              <option value="Inspecting">Inspecting</option>
+              <option value="Inspected">Inspected</option>
               <option value="Completed">Completed</option>
             </select>
           </div>
@@ -1122,7 +1123,7 @@ function ApplicationList() {
                     <option value="Payment Pending">Payment Pending</option>
                     <option value="Payment Recieved">Payment Recieved</option>
                     <option value="Payment Failed">Payment Failed</option>
-                    <option value="Inspecting">Inspecting</option>
+                    <option value="Inspected">Inspected</option>
                     <option value="Completed">Completed</option>
                   </select>
                 </div>

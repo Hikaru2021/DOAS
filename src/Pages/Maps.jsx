@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import '../CSS/Maps.css';
 import L from 'leaflet';
 import { supabase } from '../library/supabaseClient';
-import { FaMapMarkedAlt, FaSearchLocation, FaMapMarkerAlt, FaSearch, FaSearchPlus } from 'react-icons/fa';
+import { FaMapMarkedAlt, FaSearchLocation, FaMapMarkerAlt, FaSearch, FaSearchPlus, FaCheck } from 'react-icons/fa';
 
 // Fix for default marker icons in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -41,17 +41,20 @@ const Maps = () => {
     const [applications, setApplications] = useState([]);
     const [selectedAppId, setSelectedAppId] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [confirmAppId, setConfirmAppId] = useState(null);
+
+    // Move fetchApplications to top-level so it can be called after inspection completion
+    const fetchApplications = async () => {
+        const { data, error } = await supabase
+            .from('user_applications')
+            .select('*')
+            .eq('status', 9);
+        if (!error && data) {
+            setApplications(data.filter(app => app.location && app.location.includes(',')));
+        }
+    };
 
     useEffect(() => {
-        async function fetchApplications() {
-            const { data, error } = await supabase
-                .from('user_applications')
-                .select('*')
-                .eq('status', 9);
-            if (!error && data) {
-                setApplications(data.filter(app => app.location && app.location.includes(',')));
-            }
-        }
         fetchApplications();
     }, []);
 
@@ -107,7 +110,7 @@ const Maps = () => {
                                     <Marker key={app.id} position={[lat, lng]}>
                                         <Popup>
                                             <strong>{app.full_name || 'No Name'}</strong><br />
-                                            Reference #: {referenceNumber}<br />
+                                            {referenceNumber}<br />
                                             {app.address || 'No Address'}
                                         </Popup>
                                     </Marker>
@@ -155,6 +158,15 @@ const Maps = () => {
                                                 <div className="maps-app-list-ref">Reference #: {referenceNumber}</div>
                                                 <div className="maps-app-list-address">{app.address || 'No Address'}</div>
                                                 <div className="maps-app-list-coords">({lat.toFixed(5)}, {lng.toFixed(5)})</div>
+                                                <button 
+                                                    className="maps-check-button"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setConfirmAppId(app.id);
+                                                    }}
+                                                >
+                                                    <FaCheck />
+                                                </button>
                                             </li>
                                         );
                                     })}
@@ -164,6 +176,72 @@ const Maps = () => {
                     </div>
                 </div>
             </div>
+            {/* Confirmation Modal */}
+            {confirmAppId && (
+                <div className="maps-modal-overlay">
+                    <div className="maps-modal-container">
+                        <div className="maps-modal-header-row">
+                            <h2 className="maps-modal-title">Complete Inspection</h2>
+                            <button className="maps-modal-close" onClick={() => setConfirmAppId(null)} aria-label="Close">&times;</button>
+                        </div>
+                        <div className="maps-modal-body">
+                            <p>Are you sure you are done inspecting this application?</p>
+                            <div className="maps-modal-warning">
+                                This action cannot be undone. The inspection will be marked as complete.
+                            </div>
+                        </div>
+                        <div className="maps-modal-actions">
+                            <button
+                                className="maps-modal-cancel"
+                                onClick={() => setConfirmAppId(null)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className="maps-modal-confirm maps-modal-danger"
+                                onClick={async () => {
+                                    const { data, error } = await supabase
+                                        .from('user_applications')
+                                        .update({ status: 11 })
+                                        .eq('id', confirmAppId)
+                                        .select();
+
+                                    if (error) {
+                                        alert('Failed to update status: ' + error.message);
+                                    } else {
+                                        const now = new Date();
+                                        const formattedDate = now.toLocaleString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                            hour: 'numeric',
+                                            minute: '2-digit',
+                                            hour12: true
+                                        });
+                                        const remarks = `Inspection completed on ${formattedDate}. Please wait for further updates or instructions.`;
+                                        const isoNow = now.toISOString();
+                                        await supabase
+                                            .from('application_status_history')
+                                            .insert([
+                                                {
+                                                    user_application_id: confirmAppId,
+                                                    status_id: 11,
+                                                    remarks: remarks,
+                                                    changed_at: isoNow
+                                                }
+                                            ]);
+                                        // Refresh the applications list after completion
+                                        await fetchApplications();
+                                        setConfirmAppId(null);
+                                    }
+                                }}
+                            >
+                                Complete Inspection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

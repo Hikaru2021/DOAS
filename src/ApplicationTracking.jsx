@@ -144,6 +144,7 @@ const ApplicationTracking = () => {
             case 8: return 'Payment Failed';
             case 9: return 'Inspecting';
             case 10: return 'Completed';
+            case 11: return 'Inspected';
             default: return 'Unknown';
           }
         };
@@ -551,7 +552,8 @@ const ApplicationTracking = () => {
     { label: 'Submitted', ids: [1], icon: <FaClock />, className: 'submitted' },
     { label: 'Under Review / Needs Revision', ids: [2, 3], icon: null, className: '' },
     { label: 'Payment', ids: [6, 7, 8], icon: null, className: '' },
-    { label: 'Inspecting', ids: [9], icon: <FaSearch />, className: 'inspecting' },
+    // For Inspecting/Inspected, use one step and change label/icon/class dynamically
+    { label: statusId === 11 ? 'Inspected' : 'Inspecting', ids: [9, 11], icon: statusId === 11 ? <FaCheckCircle /> : <FaSearch />, className: statusId === 11 ? 'inspected' : 'inspecting' },
     { label: 'Approved', ids: [4], icon: <FaCheckCircle />, className: 'approved' },
   ];
 

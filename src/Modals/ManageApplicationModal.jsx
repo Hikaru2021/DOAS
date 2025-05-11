@@ -33,7 +33,8 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
     7: 'Payment Recieved',
     8: 'Payment Failed',
     9: 'Inspecting',
-    10: 'Completed'
+    10: 'Completed',
+    11: 'Inspected'
   };
 
   // Status remarks mapping
@@ -47,7 +48,8 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
     7: 'Payment confirmed on [date_now with time]. Next steps will follow.',
     8: 'Payment failed. Please complete the payment by [insert deadline date].',
     9: 'Inspection scheduled. Please be prepared and ensure all necessary documents are available for the inspection.',
-    10: 'Process completed on [date_now with time].'
+    10: 'Process completed on [date_now with time].',
+    11: 'Inspection completed on [date_now with time]. Please wait for further updates or instructions.'
   };
 
   // Helper to format date as 'MMM DD, YYYY, HH:mm'
@@ -382,7 +384,7 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
                   <input
                     type="text"
                     id="currentStatus"
-                    value={userApplication?.status ? statusNames[userApplication.status] || 'Unknown' : 'Unknown'}
+                    value={userApplication?.status !== undefined && userApplication?.status !== null ? statusNames[userApplication.status] || 'Unknown' : 'Unknown'}
                     readOnly
                     className="form-input readonly"
                   />
