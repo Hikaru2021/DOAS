@@ -6,12 +6,10 @@ import "./CSS/SharedTable.css";
 import { supabase } from "./library/supabaseClient";
 import ApplicationTracking from './ApplicationTracking';
 
-function formatDateMMDDYYYY(date) {
+function formatDateMMMDDYYYY(date) {
   const d = new Date(date);
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  return `${mm}-${dd}-${yyyy}`;
+  const options = { year: 'numeric', month: 'short', day: '2-digit' };
+  return d.toLocaleDateString('en-US', options);
 }
 
 function formatTime12hr(date) {
@@ -667,7 +665,7 @@ function MyApplication() {
                     <div><strong>Title:</strong> <span className="application-title">{application.title}</span></div>
                     <div><strong>Type:</strong> {application.type}</div>
                     <div><strong>Status:</strong> <span className={`status-badge ${application.status.toLowerCase().replace(' ', '-')}`}>{application.status}</span></div>
-                    <div><strong>Submission Date:</strong> {formatDateMMDDYYYY(application.submissionDate)}</div>
+                    <div><strong>Submission Date:</strong> {formatDateMMMDDYYYY(application.submissionDate)}</div>
                     <div className="action-buttons">
                       <button 
                         className={`action-button ${application.status === "Approved" || application.status === "Denied" ? 'view-button' : 'track-button'}`}
@@ -712,7 +710,7 @@ function MyApplication() {
                           <td className="status-col td-center">
                             <span className={`status-badge ${application.status.toLowerCase().replace(' ', '-')}`}>{application.status}</span>
                           </td>
-                          <td className="submission-date-col td-center">{formatDateMMDDYYYY(application.submissionDate)}</td>
+                          <td className="submission-date-col td-center">{formatDateMMMDDYYYY(application.submissionDate)}</td>
                           <td className="td-center">
                             <div className="action-buttons">
                               <button 

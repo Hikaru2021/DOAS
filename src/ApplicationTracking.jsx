@@ -87,6 +87,30 @@ const ApplicationTracking = () => {
     };
   };
 
+  // Helper to format a date string to 'MM/DD/YYYY HH:MM AM/PM'
+  const formatDateTimeFull = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const mm = String(date.getMonth() + 1).padStart(2);
+    const dd = String(date.getDate()).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    return `${mm}/${dd}/${yyyy} ${hours}:${minutes} ${ampm}`;
+  };
+
+  // Helper to reformat all date/timestamps in a string to 'YYYY-MM-DD HH:MM AM/PM'
+  const reformatDatesInText = (text) => {
+    if (!text) return '';
+    // Regex to match ISO or common date formats
+    return text.replace(/(\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?)/g, (match) => {
+      return formatDateTimeFull(match);
+    });
+  };
+
   useEffect(() => {
     const fetchApplication = async () => {
       try {
@@ -670,7 +694,7 @@ const ApplicationTracking = () => {
                   </div>
                   <div className="timeline-marker"></div>
                   <div className="timeline-content">
-                    <p>{item.description}</p>
+                    <p>{reformatDatesInText(item.description)}</p>
                     {item.additionalInfo && (
                       <div className="additional-info">
                         <p>Recipient: {item.additionalInfo.recipient}</p>

@@ -11,12 +11,10 @@ import JSZip from 'jszip';
 // Supabase storage constants
 const STORAGE_BUCKET = 'guidelines';
 
-function formatDateMMDDYYYY(date) {
+function formatDateMMMDDYYYY(date) {
   const d = new Date(date);
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  return `${mm}-${dd}-${yyyy}`;
+  const options = { year: 'numeric', month: 'short', day: '2-digit' };
+  return d.toLocaleDateString('en-US', options);
 }
 
 function formatTime12hr(date) {
@@ -815,7 +813,7 @@ function ApplicationList() {
                   <div><strong>Title:</strong> {application.title}</div>
                   <div><strong>Type:</strong> {application.type}</div>
                   <div><strong>Status:</strong> <span className={`status-badge ${application.status.toLowerCase().replace(' ', '-')}`}>{application.status}</span></div>
-                  <div><strong>Submitted Date:</strong> {formatDateMMDDYYYY(application.submitted_at)}</div>
+                  <div><strong>Submitted Date:</strong> {formatDateMMMDDYYYY(application.submitted_at)}</div>
                   <div className="action-buttons">
                     <button 
                       className="action-button view-button" 
@@ -879,7 +877,7 @@ function ApplicationList() {
                       <td>{application.applicant_name}</td>
                       <td className="title-col"><DraggableTitle>{application.title}</DraggableTitle></td>
                       <td className="td-center">{application.type}</td>
-                      <td className="td-center">{formatDateMMDDYYYY(application.submitted_at)}</td>
+                      <td className="td-center">{formatDateMMMDDYYYY(application.submitted_at)}</td>
                       <td className="td-center">
                         <span className={`status-badge ${application.status.toLowerCase().replace(' ', '-')}`}>
                           {application.status}
@@ -1075,7 +1073,7 @@ function ApplicationList() {
               </div>
               <div className="modal-section">
                 <h3><FaClock /> Submitted Date</h3>
-                <p>{formatDateMMDDYYYY(selectedApplication.submitted_at)} at {formatTime12hr(selectedApplication.submitted_at)}</p>
+                <p>{formatDateMMMDDYYYY(selectedApplication.submitted_at)} at {formatTime12hr(selectedApplication.submitted_at)}</p>
               </div>
               {selectedApplication.notes && (
                 <div className="modal-section">

@@ -14,12 +14,10 @@ import * as XLSX from 'xlsx';
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement);
 
 // Add utility functions at the top (after imports)
-function formatDateMMDDYYYY(date) {
+function formatDateMMMDDYYYY(date) {
   const d = new Date(date);
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  return `${mm}-${dd}-${yyyy}`;
+  const options = { year: 'numeric', month: 'short', day: '2-digit' };
+  return d.toLocaleDateString('en-US', options);
 }
 function formatTime12hr(date) {
   const d = new Date(date);
@@ -853,7 +851,7 @@ function Reports() {
       pdf.setFontSize(10);
       pdf.text(`Period: ${reportData.dateLabel}`, 14, 42);
       pdf.text(`Total Applications: ${reportData.totalApplications}`, 14, 48);
-      pdf.text(`Generated On: ${formatDateMMDDYYYY(reportData.generatedDate)}`, 14, 54);
+      pdf.text(`Generated On: ${formatDateMMMDDYYYY(reportData.generatedDate)}`, 14, 54);
 
       // Table columns
       const columns = [
@@ -871,7 +869,7 @@ function Reports() {
         contact: app.contact_number || 'N/A',
         address: app.address || 'N/A',
         purpose: app.purpose || 'N/A',
-        submissionDate: formatDateMMDDYYYY(app.created_at)
+        submissionDate: formatDateMMMDDYYYY(app.created_at)
       }));
 
       // Use autoTable (ESM style)
@@ -946,7 +944,7 @@ function Reports() {
         app.contact_number || 'N/A',
         app.address || 'N/A',
         app.purpose || 'N/A',
-        new Date(app.created_at).toLocaleDateString()
+        formatDateMMMDDYYYY(app.created_at)
       ]);
       
       // Create CSV content
@@ -1043,7 +1041,7 @@ function Reports() {
         'Address': app.address || 'N/A',
         'Purpose': app.purpose || 'N/A',
         'Status': getStatusName(app.status),
-        'Submission Date': new Date(app.created_at).toLocaleDateString()
+        'Submission Date': formatDateMMMDDYYYY(app.created_at)
       }));
       
       // Create worksheet from data
@@ -1774,7 +1772,7 @@ function Reports() {
                         <td>REF-{app.id.toString().padStart(6, '0')}</td>
                         <td>{app.full_name || 'N/A'}</td>
                         <td>{app.purpose || 'N/A'}</td>
-                        <td>{formatDateMMDDYYYY(app.created_at)}</td>
+                        <td>{formatDateMMMDDYYYY(app.created_at)}</td>
                         <td style={{ textAlign: 'center' }}>
                           <span className={`status-badge ${getStatusName(app.status).toLowerCase().replace(/ /g, '-')}`}>
                             {getStatusName(app.status)}
@@ -1846,7 +1844,7 @@ function Reports() {
             </div>
               <div className="report-info-item">
                 <span className="info-label">Generated On:</span>
-                <span className="info-value">{formatDateMMDDYYYY(reportData.generatedDate)}</span>
+                <span className="info-value">{formatDateMMMDDYYYY(reportData.generatedDate)}</span>
           </div>
             </div>
             
@@ -1877,7 +1875,7 @@ function Reports() {
                         <td>{app.contact_number || "N/A"}</td>
                         <td>{app.address || "N/A"}</td>
                         <td>{app.purpose || "N/A"}</td>
-                        <td>{formatDateMMDDYYYY(app.created_at)}</td>
+                        <td>{formatDateMMMDDYYYY(app.created_at)}</td>
               </tr>
                     ))}
             </tbody>
@@ -1891,7 +1889,7 @@ function Reports() {
             
             <div className="report-footer">
               <p>This is an automatically generated report from the DENR Online Permit Application System.</p>
-              <p>Generated on: {formatDateMMDDYYYY(reportData.generatedDate)}</p>
+              <p>Generated on: {formatDateMMMDDYYYY(reportData.generatedDate)}</p>
             </div>
           </div>
       </div>

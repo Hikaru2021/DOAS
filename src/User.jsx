@@ -9,12 +9,10 @@ const STATUS_MAPPING = {
   2: { label: 'Blocked', class: 'status-blocked' }
 };
 
-function formatDateMMDDYYYY(date) {
+function formatDateMMMDDYYYY(date) {
   const d = new Date(date);
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  return `${mm}-${dd}-${yyyy}`;
+  const options = { year: 'numeric', month: 'short', day: '2-digit' };
+  return d.toLocaleDateString('en-US', options);
 }
 
 function formatTime12hr(date) {
@@ -419,7 +417,7 @@ const User = () => {
                     <span className="user-label">Status:</span> <span className={`status-badge ${getStatusBadgeClass(user.status)}`}>{getStatusText(user.status)}</span>
                   </div>
                   <div className="user-info-section">
-                    <span className="user-label">Created:</span> <span className="user-created">{formatDateMMDDYYYY(user.created_at)}</span>
+                    <span className="user-label">Created:</span> <span className="user-created">{formatDateMMMDDYYYY(user.created_at)}</span>
                   </div>
                   <div className="action-buttons">
                     <button
@@ -492,7 +490,7 @@ const User = () => {
                         <option value="3">User</option>
                       </select>
                     </td>
-                    <td className="created-at-col">{formatDateMMDDYYYY(user.created_at)}</td>
+                    <td className="created-at-col">{formatDateMMMDDYYYY(user.created_at)}</td>
                     <td className="td-center">
                       <select
                         value={user.status || ""}
