@@ -145,6 +145,10 @@
     min-height: 450px;
 }
 
+.dashboard-card .card-header {
+    padding: 10px;
+}
+
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -1237,4 +1241,34 @@
     height: 30px;
     display: flex;
     align-items: center;
+}
+
+.user-card-mobile .user-name {
+    font-weight: 700;
+    color: #222;
+    font-size: 1.13rem;
+    margin-bottom: 0.08rem;
+    text-align: center;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+}
+
+.user-card-mobile .user-email {
+    font-weight: 500;
+    color: #388e3c;
+    font-size: 1.01rem;
+    margin-bottom: 0.18rem;
+    text-align: left;
+    word-break: break-all;
+    background: #f1f8e9;
+    border-radius: 8px;
+    padding: 0.18em 0.5em;
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -228,7 +228,7 @@ div.my-application-filters {
     gap: 0.4rem;
     box-shadow: 0 4px 16px rgba(60,60,60,0.13);
     border: 1.5px solid #bfc4ca;
-    border-radius: 22px;
+    border-radius: 10px;
   }
   .user-card-mobile .profile-picture-container {
     width: 64px;
@@ -281,16 +281,20 @@ div.my-application-filters {
     color: #222;
     font-size: 1.13rem;
     margin-bottom: 0.08rem;
-    text-align: left;
+    text-align: center;
     letter-spacing: 0.01em;
     line-height: 1.2;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
   .user-card-mobile .user-email {
     font-weight: 500;
     color: #388e3c;
     font-size: 1.01rem;
     margin-bottom: 0.18rem;
-    text-align: left;
+    text-align: center;
     word-break: break-all;
     background: #f1f8e9;
     border-radius: 8px;
@@ -349,13 +353,12 @@ div.my-application-filters {
     background: #f7f7f7;
     color: #666;
     border: 1px solid #e0e0e0;
-    border-radius: 50%;
     padding: 0.45em;
     font-size: 1.15em;
     box-shadow: none;
     transition: background 0.2s, color 0.2s, border-color 0.2s;
-    width: 2.2em;
-    height: 2.2em;
+    width: 2.0em;
+    height: 2.0em;
     display: flex;
     align-items: center;
     justify-content: center;
