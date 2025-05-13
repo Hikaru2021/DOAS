@@ -108,7 +108,7 @@ const Sidebar = () => {
         <div className="sidebar-header">
           <img src="/Logo1.png" alt="DENR" className="sidebar-logo" />
           <h2 className="sidebar-title">DENR-CENRO BAYBAY</h2>
-          <h2 className="sidebar-title">DOAS</h2>
+          <h2 className="sidebar-title">OPAS</h2>
         </div>
 
         <div className="sidebar-section">

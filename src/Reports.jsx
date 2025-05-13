@@ -350,30 +350,39 @@ function Reports() {
     }
   ];
 
-  // Mock data for charts
+  // Status mapping for Applications by Status chart
+  const statusMap = [
+    { code: 1, label: 'Submitted', color: 'rgba(255, 206, 86, 0.5)', border: 'rgba(255, 206, 86, 1)' },
+    { code: 2, label: 'Under Review', color: 'rgba(54, 162, 235, 0.5)', border: 'rgba(54, 162, 235, 1)' },
+    { code: 3, label: 'Needs Revision', color: 'rgba(255, 159, 64, 0.5)', border: 'rgba(255, 159, 64, 1)' },
+    { code: 4, label: 'Approved', color: 'rgba(75, 192, 192, 0.5)', border: 'rgba(75, 192, 192, 1)' },
+    { code: 5, label: 'Rejected', color: 'rgba(255, 99, 132, 0.5)', border: 'rgba(255, 99, 132, 1)' },
+    { code: 6, label: 'Payment Pending', color: 'rgba(255, 205, 86, 0.5)', border: 'rgba(255, 205, 86, 1)' },
+    { code: 7, label: 'Payment Recieved', color: 'rgba(54, 162, 235, 0.5)', border: 'rgba(54, 162, 235, 1)' },
+    { code: 8, label: 'Payment Failed', color: 'rgba(255, 99, 132, 0.5)', border: 'rgba(255, 99, 132, 1)' },
+    { code: 9, label: 'Inspecting', color: 'rgba(75, 192, 192, 0.5)', border: 'rgba(75, 192, 192, 1)' },
+    { code: 11, label: 'Inspected', color: 'rgba(54, 162, 235, 0.5)', border: 'rgba(54, 162, 235, 1)' },
+    { code: 10, label: 'Completed', color: 'rgba(75, 192, 192, 0.5)', border: 'rgba(75, 192, 192, 1)' }
+  ];
+
+  const statusCounts = statusMap.map(({ code }) =>
+    userApplications.filter(app => app.status === code).length
+  );
+
+  // Chart data for charts tab
   const chartData = {
     // Bar chart data - Applications by month
     applicationsByMonth: processMonthlyApplications(),
     
     // Pie chart data - Applications by status
     applicationsByStatus: {
-      labels: ['Pending', 'On Review', 'Approved', 'Denied'],
+      labels: statusMap.map(s => s.label),
       datasets: [
         {
           label: 'Applications by Status',
-          data: [30, 25, 35, 10],
-          backgroundColor: [
-            'rgba(255, 206, 86, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(75, 192, 192, 0.5)',
-            'rgba(255, 99, 132, 0.5)',
-          ],
-          borderColor: [
-            'rgba(255, 206, 86, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(255, 99, 132, 1)',
-          ],
+          data: statusCounts,
+          backgroundColor: statusMap.map(s => s.color),
+          borderColor: statusMap.map(s => s.border),
           borderWidth: 1,
         },
       ],
@@ -502,6 +511,18 @@ function Reports() {
     elements: {
       arc: {
         borderWidth: 2
+      }
+    },
+    plugins: {
+      ...commonChartOptions.plugins,
+      tooltip: {
+        ...commonChartOptions.plugins.tooltip,
+        callbacks: {
+          label: function(context) {
+            // For pie/doughnut charts, use context.label and context.raw
+            return `${context.label}: ${context.raw}`;
+          }
+        }
       }
     }
   };

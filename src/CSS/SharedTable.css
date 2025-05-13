@@ -98,6 +98,10 @@
   background-color: #2196f3;
   color: #fff;
 }
+.status-badge.inspecting {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
 .status-badge.completed {
   background-color: #e6fcf5;
   color: #087f5b;

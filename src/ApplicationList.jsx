@@ -98,6 +98,9 @@ function ApplicationList() {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
+  // Get filterById from navigation state
+  const filterById = location.state?.filterById;
+
   // Status mapping function
   const getStatusName = (statusId) => {
     switch (statusId) {
@@ -245,12 +248,16 @@ function ApplicationList() {
   // Filter and sort applications
   const filteredAndSortedApplications = applications
     .filter(app => {
+      // If filterById is set, only show that application
+      if (filterById) {
+        // Accept both numeric and string IDs
+        return app.id === filterById || app.referenceNumber === filterById || app.application_id === filterById || app.id === Number(filterById);
+      }
       // Search filter
       const matchesSearch = 
         app.title.toLowerCase().includes(search.toLowerCase()) ||
         app.applicant_name.toLowerCase().includes(search.toLowerCase()) ||
         app.application_id.toLowerCase().includes(search.toLowerCase());
-      
       // Status filter
       let matchesStatus = false;
       if (statusFilter === "all") {
@@ -260,10 +267,8 @@ function ApplicationList() {
       } else {
         matchesStatus = app.statusId === statusFilter;
       }
-      
       // Type filter
       const matchesType = typeFilter === "all" || app.type === typeFilter;
-      
       return matchesSearch && matchesStatus && matchesType;
     })
     .sort((a, b) => {

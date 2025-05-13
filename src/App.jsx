@@ -102,6 +102,11 @@ function App() {
               allowedRoles={[1,2,3,4]} 
             />
           } />
+          <Route path="Tracking/:id" element={
+            <RoleProtectedRoute>
+              <ApplicationTracking />
+            </RoleProtectedRoute>
+          } />
           {/* Error pages */}
           <Route path="forbidden" element={<AccessDenied requiredRoles={[1, 2]} />} />
           <Route path="not-found" element={<ErrorPage statusCode={404} />} />

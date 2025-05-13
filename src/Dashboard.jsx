@@ -526,11 +526,11 @@ function Dashboard() {
   const handleApplicationClick = (application) => {
     // Route to different components based on user role
     if (userRole === 1 || userRole === 2) {
-      // Admin or Manager: Navigate to ApplicationList
-      navigate('/ApplicationList', { state: { selectedApplicationId: application.id } });
-    } else {
-      // Regular User: Navigate to MyApplication
-      navigate('/MyApplication', { state: { selectedApplicationId: application.id } });
+      // Admin or Manager: Navigate to ApplicationList and show only the selected application
+      navigate('/ApplicationList', { state: { selectedApplicationId: application.id, filterById: application.id } });
+    } else if (userRole === 3 || userRole === 4) {
+      // Regular User or Inspector: Navigate to ApplicationTracking for the specific application (with ID in URL)
+      navigate(`/application/${application.id}`);
     }
   };
 
@@ -583,6 +583,24 @@ function Dashboard() {
         return "dashboard-status-inspected";
       default:
         return "";
+    }
+  };
+
+  // Returns the correct status-badge class for each status
+  const getStatusBadgeClass = (statusId) => {
+    switch (statusId) {
+      case 1: return 'submitted';
+      case 2: return 'under-review';
+      case 3: return 'needs-revision';
+      case 4: return 'approved';
+      case 5: return 'rejected';
+      case 6: return 'payment-pending';
+      case 7: return 'payment-recieved';
+      case 8: return 'payment-failed';
+      case 9: return 'inspecting';
+      case 10: return 'completed';
+      case 11: return 'inspected';
+      default: return '';
     }
   };
 
@@ -1044,7 +1062,7 @@ function Dashboard() {
                         <p><strong>Submitted:</strong> {new Date(app.created_at).toLocaleTimeString()}</p>
                       </div>
                       <div className="application-status">
-                        <span className={`dashboard-status-badge ${getStatusClass(app.status)}`}>
+                        <span className={`status-badge ${getStatusBadgeClass(app.status)}`}>
                           {getStatusName(app.status)}
                         </span>
                       </div>
