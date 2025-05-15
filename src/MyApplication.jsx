@@ -454,6 +454,7 @@ function MyApplication() {
         return "Track";
       case "Approved":
       case "Rejected":
+      case "Completed":
         return "View";
       default:
         return "Track";
@@ -668,13 +669,13 @@ function MyApplication() {
                     <div><strong>Submission Date:</strong> {formatDateMMMDDYYYY(application.submissionDate)}</div>
                     <div className="action-buttons">
                       <button 
-                        className={`action-button ${application.status === "Approved" || application.status === "Denied" ? 'view-button' : 'track-button'}`}
+                        className={`action-button ${application.status === "Approved" || application.status === "Denied" || application.status === "Completed" ? 'view-button' : 'track-button'}`}
                         onClick={() => handleViewDetails(application)}
                         title={`${getActionText(application.status)} Application`}
                       >
-                        {application.status === "Approved" || application.status === "Denied" ? <FaEye /> : <FaChartLine />}
+                        {application.status === "Approved" || application.status === "Denied" || application.status === "Completed" ? <FaEye /> : <FaChartLine />}
                       </button>
-                      {application.status !== "Approved" && application.status !== "Under Review" && (
+                      {application.status !== "Approved" && application.status !== "Under Review" && application.status !== "Completed" && application.status !== "Inspecting" && (
                         <button 
                           className="action-button delete-button" 
                           onClick={() => handleDeleteClick(application.id)}
@@ -714,13 +715,13 @@ function MyApplication() {
                           <td className="td-center">
                             <div className="action-buttons">
                               <button 
-                                className={`action-button ${application.status === "Approved" || application.status === "Denied" ? 'view-button' : 'track-button'}`}
+                                className={`action-button ${application.status === "Approved" || application.status === "Denied" || application.status === "Completed" ? 'view-button' : 'track-button'}`}
                                 onClick={() => handleViewDetails(application)}
                                 title={`${getActionText(application.status)} Application`}
                               >
-                                {application.status === "Approved" || application.status === "Denied" ? <FaEye /> : <FaChartLine />}
+                                {application.status === "Approved" || application.status === "Denied" || application.status === "Completed" ? <FaEye /> : <FaChartLine />}
                               </button>
-                              {application.status !== "Approved" && application.status !== "Under Review" && (
+                              {application.status !== "Approved" && application.status !== "Under Review" && application.status !== "Completed" && application.status !== "Inspecting" && (
                                 <button 
                                   className="action-button delete-button" 
                                   onClick={() => handleDeleteClick(application.id)}
