@@ -1131,138 +1131,134 @@ function Reports() {
   // Add the renderCharts function back 
   const renderCharts = () => (
     <div className="charts-container">
-      <div className="chart-row">
-        <div className="chart-card">
-          <div className="chart-header">
+      <div className="chart-card">
+        <div className="chart-header">
           <h3 className="chart-title">Applications by Month</h3>
-            <div className="year-selector">
-              <label htmlFor="year-select">Year: </label>
-              <select 
-                id="year-select" 
-                value={selectedYear} 
-                onChange={handleYearChange}
-                className="year-dropdown"
-              >
-                <option value="all">All Years</option>
-                {getAvailableYears().map(year => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="chart-wrapper">
-            {isLoading ? (
-              <div className="loading-spinner">Loading...</div>
-            ) : error ? (
-              <div className="error-message">{error}</div>
-            ) : (
-            <Bar 
-              data={chartData.applicationsByMonth} 
-                options={barChartOptions}
-              />
-            )}
+          <div className="year-selector">
+            <label htmlFor="year-select">Year: </label>
+            <select 
+              id="year-select" 
+              value={selectedYear} 
+              onChange={handleYearChange}
+              className="year-dropdown"
+            >
+              <option value="all">All Years</option>
+              {getAvailableYears().map(year => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
           </div>
         </div>
-        
-        <div className="chart-card">
-          <h3 className="chart-title">Applications by Status</h3>
-          <div className="chart-wrapper">
-            <Pie 
-              data={chartData.applicationsByStatus} 
-              options={pieChartOptions}
+        <div className="chart-wrapper">
+          {isLoading ? (
+            <div className="loading-spinner">Loading...</div>
+          ) : error ? (
+            <div className="error-message">{error}</div>
+          ) : (
+            <Bar 
+              data={chartData.applicationsByMonth} 
+              options={barChartOptions}
             />
-          </div>
+          )}
         </div>
       </div>
       
-      <div className="chart-row">
-        <div className="chart-card">
-          <div className="chart-header">
-            <h3 className="chart-title">Permit & Certificate Trends</h3>
-            <div className="year-selector">
-              <label htmlFor="year-select-2">Year: </label>
-              <select 
-                id="year-select-2" 
-                value={selectedYear} 
-                onChange={handleYearChange}
-                className="year-dropdown"
-              >
-                <option value="all">All Years</option>
-                {getAvailableYears().map(year => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="chart-wrapper">
-            {isLoading ? (
-              <div className="loading-spinner">Loading...</div>
-            ) : error ? (
-              <div className="error-message">{error}</div>
-            ) : (
-            <Line 
-              data={chartData.processingTimeTrends} 
-                options={lineChartOptions}
-              />
-            )}
+      <div className="chart-card">
+        <h3 className="chart-title">Applications by Status</h3>
+        <div className="chart-wrapper">
+          <Pie 
+            data={chartData.applicationsByStatus} 
+            options={pieChartOptions}
+          />
+        </div>
+      </div>
+      
+      <div className="chart-card">
+        <div className="chart-header">
+          <h3 className="chart-title">Permit & Certificate Trends</h3>
+          <div className="year-selector">
+            <label htmlFor="year-select-2">Year: </label>
+            <select 
+              id="year-select-2" 
+              value={selectedYear} 
+              onChange={handleYearChange}
+              className="year-dropdown"
+            >
+              <option value="all">All Years</option>
+              {getAvailableYears().map(year => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
           </div>
         </div>
-        
-        <div className="user-activity-section">
-          <div className="section-header">
-            <h3 className="section-title">User Activity</h3>
-            <div className="period-selector">
-              <select 
-                value={userActivityPeriod} 
-                onChange={(e) => setUserActivityPeriod(e.target.value)}
-                className="period-dropdown"
-              >
-                <option value="monthly">Monthly</option>
-                <option value="yearly">Yearly</option>
-              </select>
-            </div>
+        <div className="chart-wrapper">
+          {isLoading ? (
+            <div className="loading-spinner">Loading...</div>
+          ) : error ? (
+            <div className="error-message">{error}</div>
+          ) : (
+            <Line 
+              data={chartData.processingTimeTrends} 
+              options={lineChartOptions}
+            />
+          )}
+        </div>
+      </div>
+      
+      <div className="user-activity-section">
+        <div className="section-header">
+          <h3 className="section-title">User Activity</h3>
+          <div className="period-selector">
+            <select 
+              value={userActivityPeriod} 
+              onChange={(e) => setUserActivityPeriod(e.target.value)}
+              className="period-dropdown"
+            >
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
           </div>
-          <div className="user-cards-container">
-            {isLoading ? (
-              <div className="loading-spinner">Loading user data...</div>
-            ) : error ? (
-              <div className="error-message">{error}</div>
-            ) : (
-              Object.values(userApplicationCounts)
-                .sort((a, b) => b.count - a.count)
-                .map((userData, index) => (
-                  <div key={userData.user.id} className="user-card">
-                    <div className="user-profile">
-                      {userData.user.profile_link ? (
-                        <img 
-                          src={userData.user.profile_link} 
-                          alt={userData.user.user_name || "User"} 
-                          className="user-avatar"
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "https://via.placeholder.com/50?text=User";
-                          }}
-                        />
-                      ) : (
-                        <div className="user-avatar-placeholder">
-                          {userData.user.user_name ? userData.user.user_name.charAt(0).toUpperCase() : "U"}
-                        </div>
-                      )}
-                      <div className="user-info">
-                        <div className="user-name">{userData.user.user_name || "Unknown User"}</div>
-                        <div className="user-email">{userData.user.email || "No email"}</div>
+        </div>
+        <div className="user-cards-container">
+          {isLoading ? (
+            <div className="loading-spinner">Loading user data...</div>
+          ) : error ? (
+            <div className="error-message">{error}</div>
+          ) : (
+            Object.values(userApplicationCounts)
+              .sort((a, b) => b.count - a.count)
+              .map((userData, index) => (
+                <div key={userData.user.id} className="user-card">
+                  <div className="user-profile">
+                    {userData.user.profile_link ? (
+                      <img 
+                        src={userData.user.profile_link} 
+                        alt={userData.user.user_name || "User"} 
+                        className="user-avatar"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://via.placeholder.com/50?text=User";
+                        }}
+                      />
+                    ) : (
+                      <div className="user-avatar-placeholder">
+                        {userData.user.user_name ? userData.user.user_name.charAt(0).toUpperCase() : "U"}
                       </div>
-                    </div>
-                    <div className="user-stats">
-                      <div className="application-count">
-                        <span className="count-value">{userData.count}</span>
-                        <span className="count-label">Applications {userActivityPeriod === "monthly" ? "this month" : "this year"}</span>
-                      </div>
+                    )}
+                    <div className="user-info">
+                      <div className="user-name">{userData.user.user_name || "Unknown User"}</div>
+                      <div className="user-email">{userData.user.email || "No email"}</div>
                     </div>
                   </div>
-                ))
-            )}
-          </div>
+                  <div className="user-stats">
+                    <div className="application-count">
+                      <span className="count-value">{userData.count}</span>
+                      <span className="count-label">Applications {userActivityPeriod === "monthly" ? "this month" : "this year"}</span>
+                    </div>
+                  </div>
+                </div>
+              ))
+          )}
         </div>
       </div>
     </div>
