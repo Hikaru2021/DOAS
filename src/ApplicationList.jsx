@@ -117,6 +117,24 @@ function ApplicationList() {
     }
   };
 
+  // Add function to get status ID from name
+  const getStatusId = (statusName) => {
+    switch (statusName) {
+      case "Submitted": return 1;
+      case "Under Review": return 2;
+      case "Needs Revision": return 3;
+      case "Approved": return 4;
+      case "Rejected": return 5;
+      case "Payment Pending": return 6;
+      case "Payment Recieved": return 7;
+      case "Payment Failed": return 8;
+      case "Inspecting": return 9;
+      case "Completed": return 10;
+      case "Inspected": return 11;
+      default: return null;
+    }
+  };
+
   // Fetch document details
   const fetchDocuments = async (userAppId) => {
     try {
@@ -260,10 +278,9 @@ function ApplicationList() {
       let matchesStatus = false;
       if (statusFilter === "all") {
         matchesStatus = true;
-      } else if (Array.isArray(statusFilter)) {
-        matchesStatus = statusFilter.includes(app.statusId);
       } else {
-        matchesStatus = app.statusId === statusFilter;
+        const statusId = getStatusId(statusFilter);
+        matchesStatus = app.statusId === statusId;
       }
       // Type filter
       const matchesType = typeFilter === "all" || app.type === typeFilter;
@@ -741,7 +758,7 @@ function ApplicationList() {
               value={statusFilter}
               onChange={handleStatusFilterChange}
             >
-              <option value="all">All Statuses</option>
+              <option value="all">All Status</option>
               <option value="Submitted">Submitted</option>
               <option value="Under Review">Under Review</option>
               <option value="Needs Revision">Needs Revision</option>
@@ -776,8 +793,8 @@ function ApplicationList() {
               value={sortBy}
               onChange={handleSortChange}
             >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
+              <option value="newest">Latest</option>
+              <option value="oldest">Oldest</option>
               <option value="applicant">Applicant Name</option>
               <option value="status">Status</option>
             </select>
