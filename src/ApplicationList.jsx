@@ -741,7 +741,7 @@ function ApplicationList() {
               value={statusFilter}
               onChange={handleStatusFilterChange}
             >
-              <option value="all">All Statuses</option>
+              <option value="all">All Status</option>
               <option value="Submitted">Submitted</option>
               <option value="Under Review">Under Review</option>
               <option value="Needs Revision">Needs Revision</option>
@@ -776,8 +776,8 @@ function ApplicationList() {
               value={sortBy}
               onChange={handleSortChange}
             >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
+              <option value="newest">Latest</option>
+              <option value="oldest">Oldest</option>
               <option value="applicant">Applicant Name</option>
               <option value="status">Status</option>
             </select>

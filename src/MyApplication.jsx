@@ -610,7 +610,7 @@ function MyApplication() {
                 onChange={handleStatusFilterChange}
                 className="filter-select"
               >
-                <option value="all">All Statuses</option>
+                <option value="all">All Status</option>
                 <option value="Submitted">Submitted</option>
                 <option value="Under Review">Under Review</option>
                 <option value="Needs Revision">Needs Revision</option>
@@ -632,8 +632,8 @@ function MyApplication() {
                 onChange={(e) => handleSortChange(e.target.value)}
                 className="filter-select"
               >
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
+                <option value="newest">Latest</option>
+                <option value="oldest">Oldest</option>
                 <option value="status">Status</option>
               </select>
             </div>
