@@ -1291,40 +1291,88 @@ function Reports() {
           {
             label: 'Submitted',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            borderColor: 'rgba(54, 162, 235, 1)',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(255, 160, 0, 1)',
+            backgroundColor: 'rgba(255, 193, 7, 0.2)',
             tension: 0.4,
             fill: true
           },
           {
             label: 'Under Review',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(255, 160, 0, 1)',
+            backgroundColor: 'rgba(255, 193, 7, 0.2)',
             tension: 0.4,
             fill: true
           },
           {
             label: 'Needs Revision',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            borderColor: 'rgba(255, 159, 64, 1)',
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(244, 81, 30, 1)',
+            backgroundColor: 'rgba(255, 112, 67, 0.2)',
             tension: 0.4,
             fill: true
           },
           {
             label: 'Approved',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(46, 125, 50, 1)',
+            backgroundColor: 'rgba(67, 160, 71, 0.2)',
             tension: 0.4,
             fill: true
           },
           {
             label: 'Rejected',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(183, 28, 28, 1)',
+            backgroundColor: 'rgba(229, 57, 53, 0.2)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Payment Pending',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: 'rgba(0, 105, 92, 1)',
+            backgroundColor: 'rgba(0, 137, 123, 0.2)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Payment Received',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: 'rgba(0, 105, 92, 1)',
+            backgroundColor: 'rgba(0, 137, 123, 0.2)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Payment Failed',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: 'rgba(0, 105, 92, 1)',
+            backgroundColor: 'rgba(0, 137, 123, 0.2)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Inspecting',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: 'rgba(13, 71, 161, 1)',
+            backgroundColor: 'rgba(25, 118, 210, 0.2)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Inspected',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: 'rgba(13, 71, 161, 1)',
+            backgroundColor: 'rgba(25, 118, 210, 0.2)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Completed',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: 'rgba(106, 27, 154, 1)',
+            backgroundColor: 'rgba(142, 36, 170, 0.2)',
             tension: 0.4,
             fill: true
           }
@@ -1340,11 +1388,11 @@ function Reports() {
       4: Array(12).fill(0), // Approved
       5: Array(12).fill(0), // Rejected
       6: Array(12).fill(0), // Payment Pending
-      7: Array(12).fill(0), // Payment Recieved
+      7: Array(12).fill(0), // Payment Received
       8: Array(12).fill(0), // Payment Failed
       9: Array(12).fill(0), // Inspecting
       10: Array(12).fill(0), // Completed
-      11: Array(12).fill(0) // Inspected
+      11: Array(12).fill(0)  // Inspected
     };
 
     // Filter for selected year if not "all"
@@ -1371,71 +1419,71 @@ function Reports() {
         {
           label: 'Submitted',
           data: monthlyStatusCounts[1],
-          borderColor: '#42a5f5',
-          backgroundColor: 'rgba(66, 165, 245, 0.2)',
+          borderColor: 'rgba(255, 160, 0, 1)',
+          backgroundColor: 'rgba(255, 193, 7, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Under Review',
           data: monthlyStatusCounts[2],
-          borderColor: '#26c6da',
-          backgroundColor: 'rgba(38, 198, 218, 0.2)',
+          borderColor: 'rgba(255, 160, 0, 1)',
+          backgroundColor: 'rgba(255, 193, 7, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Needs Revision',
           data: monthlyStatusCounts[3],
-          borderColor: '#ffa726',
-          backgroundColor: 'rgba(255, 167, 38, 0.2)',
+          borderColor: 'rgba(244, 81, 30, 1)',
+          backgroundColor: 'rgba(255, 112, 67, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Approved',
           data: monthlyStatusCounts[4],
-          borderColor: '#66bb6a',
-          backgroundColor: 'rgba(102, 187, 106, 0.2)',
+          borderColor: 'rgba(46, 125, 50, 1)',
+          backgroundColor: 'rgba(67, 160, 71, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Rejected',
           data: monthlyStatusCounts[5],
-          borderColor: '#ef5350',
-          backgroundColor: 'rgba(239, 83, 80, 0.2)',
+          borderColor: 'rgba(183, 28, 28, 1)',
+          backgroundColor: 'rgba(229, 57, 53, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Payment Pending',
           data: monthlyStatusCounts[6],
-          borderColor: '#ffd600',
-          backgroundColor: 'rgba(255, 214, 0, 0.2)',
+          borderColor: 'rgba(0, 105, 92, 1)',
+          backgroundColor: 'rgba(0, 137, 123, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
-          label: 'Payment Recieved',
+          label: 'Payment Received',
           data: monthlyStatusCounts[7],
-          borderColor: '#43a047',
-          backgroundColor: 'rgba(67, 160, 71, 0.2)',
+          borderColor: 'rgba(0, 105, 92, 1)',
+          backgroundColor: 'rgba(0, 137, 123, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Payment Failed',
           data: monthlyStatusCounts[8],
-          borderColor: '#d32f2f',
-          backgroundColor: 'rgba(211, 47, 47, 0.2)',
+          borderColor: 'rgba(0, 105, 92, 1)',
+          backgroundColor: 'rgba(0, 137, 123, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Inspecting',
           data: monthlyStatusCounts[9],
-          borderColor: '#1976d2',
+          borderColor: 'rgba(13, 71, 161, 1)',
           backgroundColor: 'rgba(25, 118, 210, 0.2)',
           tension: 0.4,
           fill: true
@@ -1443,16 +1491,16 @@ function Reports() {
         {
           label: 'Inspected',
           data: monthlyStatusCounts[11],
-          borderColor: '#2196f3',
-          backgroundColor: 'rgba(33, 150, 243, 0.2)',
+          borderColor: 'rgba(13, 71, 161, 1)',
+          backgroundColor: 'rgba(25, 118, 210, 0.2)',
           tension: 0.4,
           fill: true
         },
         {
           label: 'Completed',
           data: monthlyStatusCounts[10],
-          borderColor: '#00bfae',
-          backgroundColor: 'rgba(0, 191, 174, 0.2)',
+          borderColor: 'rgba(106, 27, 154, 1)',
+          backgroundColor: 'rgba(142, 36, 170, 0.2)',
           tension: 0.4,
           fill: true
         }
