@@ -108,12 +108,30 @@ function ApplicationList() {
       case 4: return "Approved";
       case 5: return "Rejected";
       case 6: return "Payment Pending";
-      case 7: return "Payment Recieved";
+      case 7: return "Payment Received";
       case 8: return "Payment Failed";
       case 9: return "Inspecting";
       case 10: return "Completed";
       case 11: return "Inspected";
       default: return "Unknown";
+    }
+  };
+
+  // Get status ID from name
+  const getStatusId = (statusName) => {
+    switch (statusName) {
+      case "Submitted": return 1;
+      case "Under Review": return 2;
+      case "Needs Revision": return 3;
+      case "Approved": return 4;
+      case "Rejected": return 5;
+      case "Payment Pending": return 6;
+      case "Payment Received": return 7;
+      case "Payment Failed": return 8;
+      case "Inspecting": return 9;
+      case "Completed": return 10;
+      case "Inspected": return 11;
+      default: return null;
     }
   };
 
@@ -248,7 +266,6 @@ function ApplicationList() {
     .filter(app => {
       // If filterById is set, only show that application
       if (filterById) {
-        // Accept both numeric and string IDs
         return app.id === filterById || app.referenceNumber === filterById || app.application_id === filterById || app.id === Number(filterById);
       }
       // Search filter
@@ -263,7 +280,8 @@ function ApplicationList() {
       } else if (Array.isArray(statusFilter)) {
         matchesStatus = statusFilter.includes(app.statusId);
       } else {
-        matchesStatus = app.statusId === statusFilter;
+        const statusId = getStatusId(statusFilter);
+        matchesStatus = app.statusId === statusId;
       }
       // Type filter
       const matchesType = typeFilter === "all" || app.type === typeFilter;
@@ -748,8 +766,9 @@ function ApplicationList() {
               <option value="Approved">Approved</option>
               <option value="Rejected">Rejected</option>
               <option value="Payment Pending">Payment Pending</option>
-              <option value="Payment Recieved">Payment Recieved</option>
+              <option value="Payment Received">Payment Received</option>
               <option value="Payment Failed">Payment Failed</option>
+              <option value="Inspecting">Inspecting</option>
               <option value="Inspected">Inspected</option>
               <option value="Completed">Completed</option>
             </select>
@@ -1124,8 +1143,9 @@ function ApplicationList() {
                     <option value="Approved">Approved</option>
                     <option value="Rejected">Rejected</option>
                     <option value="Payment Pending">Payment Pending</option>
-                    <option value="Payment Recieved">Payment Recieved</option>
+                    <option value="Payment Received">Payment Received</option>
                     <option value="Payment Failed">Payment Failed</option>
+                    <option value="Inspecting">Inspecting</option>
                     <option value="Inspected">Inspected</option>
                     <option value="Completed">Completed</option>
                   </select>
