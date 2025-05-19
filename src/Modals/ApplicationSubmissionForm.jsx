@@ -75,6 +75,43 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
   const addressInputRef = useRef();
   let addressFetchTimeout = useRef();
 
+  // Add resetForm function
+  const resetForm = () => {
+    setFormData({
+      full_name: "",
+      email: "",
+      contact_number: "",
+      address: "",
+      purpose: "",
+      documents: []
+    });
+    setFormError(null);
+    setFieldErrors({});
+    setActiveStep(1);
+    setUploadedFiles([]);
+    setUploadProgress({});
+    setUploadingFiles(false);
+    setLocation({ lat: 10.6781, lng: 124.8006 });
+    setAddressManuallyEdited(false);
+    setLocating(false);
+    setAddressSuggestions([]);
+    setShowSuggestions(false);
+    
+    // Clean up any file preview URLs
+    uploadedFiles.forEach(file => {
+      if (file.preview) {
+        URL.revokeObjectURL(file.preview);
+      }
+    });
+  };
+
+  // Add useEffect for cleanup when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
+
   // Add useEffect for fetching user data
   useEffect(() => {
     const fetchUserData = async () => {
@@ -367,14 +404,14 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
       const { data: applicationData, error: applicationError } = await supabase
         .from('user_applications')
         .insert([{
-          user_id: user.id, // Use the authenticated user's ID
+          user_id: user.id,
           application_id: application.id,
-          status: 1, // Initial status (Submitted)
+          status: 1,
           full_name: formData.full_name,
           contact_number: formData.contact_number,
           address: formData.address,
           purpose: formData.purpose,
-          location: `${location.lat},${location.lng}` // Save as string
+          location: `${location.lat},${location.lng}`
         }])
         .select();
 
@@ -394,13 +431,12 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
         .from('application_status_history')
         .insert([{
           user_application_id: applicationData[0].id,
-          status_id: 1, // Submitted status
+          status_id: 1,
           remarks: `Application submitted on ${formattedNow}. Review will begin shortly.`
         }]);
         
       if (historyError) {
         console.error('Error adding status history:', historyError);
-        // Continue with the process even if history record fails
       }
       
       // Upload documents if any were added
@@ -408,7 +444,8 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
         await uploadFilesToStorage(user.id, applicationData[0].id);
       }
 
-      // Call onSuccess prop if provided
+      // Reset form and close modal
+      resetForm();
       if (onSuccess) onSuccess();
       onClose();
       return;
@@ -418,6 +455,12 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Modify the modal close button handler
+  const handleClose = () => {
+    resetForm();
+    onClose();
   };
 
   // When marker is moved or map is clicked, update location and auto-fill address
@@ -436,7 +479,7 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
           <div className="modal-title-section">
             <h2>Application Submission</h2>
           </div>
-          <button className="modal-close" onClick={onClose}>
+          <button className="modal-close" onClick={handleClose}>
             <FaTimes />
           </button>
         </div>
