@@ -1733,9 +1733,15 @@ function Reports() {
               scales: {
                 y: {
                   beginAtZero: true,
+                  suggestedMin: 0,
+                  suggestedMax: 10,
                   title: {
                     display: true,
                     text: 'Number of Applications'
+                  },
+                  ticks: {
+                    stepSize: 1,
+                    precision: 0
                   }
                 }
               },

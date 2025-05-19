@@ -331,6 +331,9 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
       // Clear form inputs after successful submission
       setComment('');
       setRevisionInstructions('');
+      
+      // Close the modal after successful update
+      onClose();
     } catch (err) {
       setFormError(err.message);
       console.error('Error updating application status:', err);
