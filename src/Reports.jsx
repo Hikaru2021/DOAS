@@ -350,17 +350,17 @@ function Reports() {
 
   // Status mapping for Applications by Status chart
   const statusMap = [
-    { code: 1, label: 'Submitted', color: 'rgba(255, 206, 86, 0.5)', border: 'rgba(255, 206, 86, 1)' },
-    { code: 2, label: 'Under Review', color: 'rgba(54, 162, 235, 0.5)', border: 'rgba(54, 162, 235, 1)' },
-    { code: 3, label: 'Needs Revision', color: 'rgba(255, 159, 64, 0.5)', border: 'rgba(255, 159, 64, 1)' },
-    { code: 4, label: 'Approved', color: 'rgba(75, 192, 192, 0.5)', border: 'rgba(75, 192, 192, 1)' },
-    { code: 5, label: 'Rejected', color: 'rgba(255, 99, 132, 0.5)', border: 'rgba(255, 99, 132, 1)' },
-    { code: 6, label: 'Payment Pending', color: 'rgba(255, 205, 86, 0.5)', border: 'rgba(255, 205, 86, 1)' },
-    { code: 7, label: 'Payment Recieved', color: 'rgba(54, 162, 235, 0.5)', border: 'rgba(54, 162, 235, 1)' },
-    { code: 8, label: 'Payment Failed', color: 'rgba(255, 99, 132, 0.5)', border: 'rgba(255, 99, 132, 1)' },
-    { code: 9, label: 'Inspecting', color: 'rgba(75, 192, 192, 0.5)', border: 'rgba(75, 192, 192, 1)' },
-    { code: 11, label: 'Inspected', color: 'rgba(54, 162, 235, 0.5)', border: 'rgba(54, 162, 235, 1)' },
-    { code: 10, label: 'Completed', color: 'rgba(75, 192, 192, 0.5)', border: 'rgba(75, 192, 192, 1)' }
+    { code: 1, label: 'Submitted', color: 'rgba(255, 193, 7, 0.5)', border: 'rgba(255, 160, 0, 1)' },      // Pending (amber)
+    { code: 2, label: 'Under Review', color: 'rgba(255, 193, 7, 0.5)', border: 'rgba(255, 160, 0, 1)' },  // Pending (amber)
+    { code: 3, label: 'Needs Revision', color: 'rgba(255, 112, 67, 0.5)', border: 'rgba(244, 81, 30, 1)' }, // Needs Revision (deep orange)
+    { code: 4, label: 'Approved', color: 'rgba(67, 160, 71, 0.5)', border: 'rgba(46, 125, 50, 1)' },      // Approved (green)
+    { code: 5, label: 'Rejected', color: 'rgba(229, 57, 53, 0.5)', border: 'rgba(183, 28, 28, 1)' },      // Rejected (red)
+    { code: 6, label: 'Payment Pending', color: 'rgba(0, 137, 123, 0.5)', border: 'rgba(0, 105, 92, 1)' }, // Payments (teal)
+    { code: 7, label: 'Payment Recieved', color: 'rgba(0, 137, 123, 0.5)', border: 'rgba(0, 105, 92, 1)' }, // Payments (teal)
+    { code: 8, label: 'Payment Failed', color: 'rgba(0, 137, 123, 0.5)', border: 'rgba(0, 105, 92, 1)' },  // Payments (teal)
+    { code: 9, label: 'Inspecting', color: 'rgba(25, 118, 210, 0.5)', border: 'rgba(13, 71, 161, 1)' },    // Inspecting (blue)
+    { code: 11, label: 'Inspected', color: 'rgba(25, 118, 210, 0.5)', border: 'rgba(13, 71, 161, 1)' },    // Inspecting (blue)
+    { code: 10, label: 'Completed', color: 'rgba(142, 36, 170, 0.5)', border: 'rgba(106, 27, 154, 1)' }    // Completed (purple)
   ];
 
   const statusCounts = statusMap.map(({ code }) =>

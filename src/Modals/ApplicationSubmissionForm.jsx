@@ -75,6 +75,38 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
   const addressInputRef = useRef();
   let addressFetchTimeout = useRef();
 
+  // Add useEffect for fetching user data
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        if (userError) throw userError;
+        if (!user) throw new Error('No authenticated user found');
+
+        const { data: userData, error: userDataError } = await supabase
+          .from('users')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+
+        if (userDataError) throw userDataError;
+        if (userData) {
+          setFormData(prev => ({
+            ...prev,
+            email: userData.email || ''
+          }));
+        }
+      } catch (err) {
+        console.error('Error fetching user data:', err);
+        setFormError('Error loading user data');
+      }
+    };
+
+    if (isOpen) {
+      fetchUserData();
+    }
+  }, [isOpen]);
+
   // Try to auto-locate with GPS on first open of step 2
   useEffect(() => {
     if (isOpen && activeStep === 2) {
@@ -534,15 +566,11 @@ const ApplicationSubmissionForm = ({ isOpen, onClose, application, onSuccess }) 
                         id="email"
                         name="email"
                         value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="Enter your email"
-                        className={`form-input${fieldErrors.email ? ' input-error' : ''}`}
-                        autoComplete="off"
+                        readOnly
+                        disabled
+                        className="form-input"
+                        style={{ backgroundColor: '#f5f5f5', cursor: 'not-allowed' }}
                       />
-                      {fieldErrors.email && (
-                        <div className="error-tooltip">{fieldErrors.email}</div>
-                      )}
                     </div>
                     <div className="form-group" style={{ width: '100%' }}>
                       <label htmlFor="contact_number">Contact Number</label>
