@@ -175,8 +175,8 @@ function Reports() {
     const years = new Set();
     let earliestYear = new Date().getFullYear(); // Default to current year
     
-    // Find the earliest year in the data
-    applications.forEach(app => {
+    // Find the earliest year in both applications and userApplications data
+    [...applications, ...userApplications].forEach(app => {
       const appDate = new Date(app.created_at);
       const year = appDate.getFullYear();
       years.add(year);
