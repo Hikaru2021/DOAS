@@ -78,7 +78,7 @@ const Update = () => {
       <div className="auth-card">
         <button 
           className="back-button"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/login')}
         >
           <FaArrowLeft />
         </button>
