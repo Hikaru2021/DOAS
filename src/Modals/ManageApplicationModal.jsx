@@ -383,36 +383,24 @@ const ManageApplicationModal = ({ isOpen, onClose, application, onUpdateStatus }
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="currentStatus">Current Status</label>
-                  <input
-                    type="text"
-                    id="currentStatus"
-                    value={userApplication?.status !== undefined && userApplication?.status !== null ? statusNames[userApplication.status] || 'Unknown' : 'Unknown'}
-                    readOnly
-                    className="form-input readonly"
-                  />
-                </div>
-
-                <div className="form-group">
                   <label htmlFor="newStatus">Update Status</label>
                   <select
                     id="newStatus"
-                    value={status}
+                    value={status || (userApplication?.status?.toString() || '')}
                     onChange={handleStatusChange}
                     required
                     className="form-input"
                   >
                     <option value="">Select new status</option>
-                    <option value="1">Submitted</option>
-                    <option value="2">Under Review</option>
-                    <option value="3">Needs Revision</option>
-                    <option value="6">Payment Pending</option>
-                    <option value="7">Payment Recieved</option>
-                    <option value="8">Payment Failed</option>
-                    <option value="9">Inspecting</option>
-                    <option value="4">Approved</option>
-                    <option value="5">Rejected</option>
-                    <option value="10">Completed</option>
+                    {Object.entries(statusNames).map(([id, name]) => (
+                      <option 
+                        key={id} 
+                        value={id}
+                        disabled={userApplication?.status === parseInt(id)}
+                      >
+                        {name} {userApplication?.status === parseInt(id) ? '(Current)' : ''}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
